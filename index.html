@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<h2>CS 4641 - Group 19</h2>
+<p>Predicting COVID-19 Spread Based on Country’s Metrics</p>
+
+<h3>Summary Figure</h3>
+<img src="img/infographic.png" alt="Infographic" style="width: 75%" />
+
+<h3>Introduction/Background</h3>
+<p>
+  We are trying to understand how effective the different characteristics of
+  countries around the world (e.g.total population, population density, GDP)
+  affect the rate at which COVID-19 spreads around the corresponding country.
+  Some models rely on user’s inputs such as local population, current status of
+  infection, while others focus more on data reported by the World Health
+  Organization and their government. In addition, there seems to be a lack of
+  information around the handling of coronavirus. It is easy to say a certain
+  place’s government handled coronavirus well because the cases are low, and
+  another’s handled it poorly due to the high rate of infection. However, this
+  approach lacks context, failing to take into account the differences in
+  countries.
+</p>
+
+<h3>Methods</h3>
+<p>
+  We are analyzing unique combinations of features of countries to approach this
+  problem. We will also try multiple machine learning approaches and see what is
+  most effective. We think this will be successful because we can be flexible in
+  our model choice and the country features we choose to analyze. We will
+  preprocess the data in order to remove duplicate columns.For example, we have
+  information on surface area, population, and population density. Population
+  density is just population / surface area, and is thus redundant information.
+  Potential methods we want to test out include linear regression, LDA, and
+  decision trees. There are concerns about the accuracy of data regarding the
+  spread of COVID, with certain countries underreporting or undertesting, which
+  could have implications on the data of our model. Therefore, if we are not
+  clear about the potential limitations of our model, we run the risk of
+  spreading misinformation. (check with TA about this idk what they’re looking
+  for). We will be using free libraries and methods to perform our analysis. So,
+  it will not cost anything. Depending on the method we use to analyze, the time
+  will vary.
+</p>
+
+<h3>Results</h3>
+<p>
+  We will use half the dataset to train the model, and then check for accuracy
+  against the other half of the dataset on past data. We can also predict the
+  future rate of COVID-19 spread and wait until the predicted date to compare
+  the actual spread against our predicted value.
+</p>
+
+<h3>Discussion</h3>
+<p>
+  We are trying to provide unbiased prediction of COVID-19 spread by using
+  various parameters for a better understanding of how each country operates and
+  to combat spread of COVID-19 based on the predicted trajectory.
+</p>
+
+<h3>References</h3>
+<ul>
+  <li>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7293495/</li>
+  <li>https://www.cdc.gov/mmwr/volumes/69/wr/mm6938a4.htm?s_cid=mm6938a4_x</li>
+  <li>https://www.cdc.gov/mmwr/volumes/69/wr/mm6939e1.htm?s_cid=mm6939e1_x</li>
+</ul>
