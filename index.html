@@ -2,6 +2,36 @@
 
 <h2>CS 4641 - Group 19</h2>
 <p>Predicting COVID-19 Spread Based on Country’s Metrics</p>
+<h3>Datasets:</h3>
+<ul>
+  <li>
+    <a href="https://ourworldindata.org/coronavirus-source-data" target="_blank"
+      >Coronavirus Timeline Data</a
+    >
+  </li>
+  <li>
+    <a
+      href="https://www.kaggle.com/sudalairajkumar/undata-country-profiles"
+      target="_blank"
+      >Country Dataset</a
+    >
+  </li>
+</ul>
+
+<p>
+  Country Dataset: Each datapoint is a country with about 50 features, including
+  GDP, Population Density, Urban Population, etc.
+</p>
+<p>
+  COVID-19 Dataset: Each row has a country and date, along with Covid statistics
+  for that country/date. These statistics include new cases, deaths, and tests
+</p>
+<p>
+  We will combine datasets based on the country key. We will also combine
+  multiple rows of the Kaggle dataset to generate a dataset that records total
+  cases per country over time (every 2 weeks). The ground truth is the true
+  number of reported COVID cases per country.
+</p>
 
 <h3>Summary Figure</h3>
 <img src="img/infographic.png" alt="Infographic" style="width: 75%" />
@@ -26,19 +56,31 @@
   We are analyzing unique combinations of features of countries to approach this
   problem. We will also try multiple machine learning approaches and see what is
   most effective. We think this will be successful because we can be flexible in
-  our model choice and the country features we choose to analyze. We will
-  preprocess the data in order to remove duplicate columns.For example, we have
-  information on surface area, population, and population density. Population
-  density is just population / surface area, and is thus redundant information.
-  Potential methods we want to test out include linear regression, LDA, and
+  our model choice and the country features we choose to analyze. Potential
+  supervised methods we want to test out include linear regression, LDA, and
   decision trees. There are concerns about the accuracy of data regarding the
   spread of COVID, with certain countries underreporting or undertesting, which
   could have implications on the data of our model. Therefore, if we are not
   clear about the potential limitations of our model, we run the risk of
-  spreading misinformation. (check with TA about this idk what they’re looking
-  for). We will be using free libraries and methods to perform our analysis. So,
-  it will not cost anything. Depending on the method we use to analyze, the time
-  will vary.
+  spreading misinformation. We will be using free libraries and methods to
+  perform our analysis. So, it will not cost anything. Depending on the method
+  we use to analyze, the time will vary. For unsupervised methods, we will use
+  GMM to cluster the data and look for relationships between the countries. From
+  this clustering, we plan on learning if clustered countries have a similar
+  Covid-19 spread.
+</p>
+
+<h3>Pre-processing</h3>
+<p>
+  For pre-processing we will remove several features. Some features contain
+  information already encoded in other features. For example, we have
+  information on population, surface area, and population density. We can remove
+  population density in this situation, as it is population/surface area. There
+  are also variables we think will likely be irrelevant to our findings, such as
+  forested area or number of endangered species, which we plan to remove.
+  Lastly, our data is entirely numerical except for the region in which a
+  country resides (e.g. southern asia) which we will represent using one-hot
+  encoding.
 </p>
 
 <h3>Results</h3>
@@ -46,7 +88,10 @@
   We will use half the dataset to train the model, and then check for accuracy
   against the other half of the dataset on past data. We can also predict the
   future rate of COVID-19 spread and wait until the predicted date to compare
-  the actual spread against our predicted value.
+  the actual spread against our predicted value. Our goal is to be within 10% of
+  the true value. For example, we can predict total COVID-19 cases for a certain
+  country 1 week into the future, and then see what the true value is once that
+  time comes.
 </p>
 
 <h3>Discussion</h3>
