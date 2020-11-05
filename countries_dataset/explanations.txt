@@ -1,0 +1,6 @@
+Current:
+FinalCountryDataset - countries with columsn cleaned/split/one-hot-encoded
+FinalCountryDatasetCombined.csv - contains FinalCountryDataset appended with the number of covid cases after 5, 25, 50 days. If we are missing values for a given country, those columns are left blank for the row. (e.g. Hong Kong has no value for 5, 25, 50 days)
+FinalCountryDatasetCombinedNoMissing.csv - contains FinalCountryDataset appended with the number of covid cases after 5, 25, 50 days. If we are missing values for a given country, that row is removed (e.g. Hong Kong is not a row in this dataset becaue we don't have those numbers)
+Covid-Total-Case-days.csv - Number of cases for a given country after 5, 25, and 50 days.
+

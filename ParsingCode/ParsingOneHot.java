@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
-public class Parsing {
+public class ParsingOneHot {
     public static void main(String[] args) throws IOException {
         File countries = new File("country_profile_variables_clean_split_columns.csv");
         Scanner sc = new Scanner(countries);
@@ -40,14 +40,8 @@ public class Parsing {
                 csvWriter.println(currLine);
             }
         }
+        sc.close();
         csvWriter.close();
 
     }
 }
-
-
-/*
-
-
-
- */
