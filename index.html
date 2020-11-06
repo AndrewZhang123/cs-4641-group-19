@@ -2,6 +2,7 @@
 
 <h2>CS 4641 - Group 19</h2>
 <p>Predicting COVID-19 Spread Based on Country’s Metrics</p>
+<p><a href="https://github.com/AndrewZhang123/cs-4641-group-19" target="_blank">GitHub Repo</a></p>
 <h3>Datasets:</h3>
 <ul>
   <li>
@@ -33,6 +34,8 @@
   number of reported COVID cases per country.
 </p>
 
+<!-------------------------------------------------------------->
+<h2>Touchpoint 1: Project Proposal</h2>
 <h3>Summary Figure</h3>
 <img src="img/infographic.png" alt="Infographic" style="width: 75%" />
 
@@ -107,3 +110,71 @@
   <li>https://www.cdc.gov/mmwr/volumes/69/wr/mm6938a4.htm?s_cid=mm6938a4_x</li>
   <li>https://www.cdc.gov/mmwr/volumes/69/wr/mm6939e1.htm?s_cid=mm6939e1_x</li>
 </ul>
+
+<!-------------------------------------------------------------->
+<h2>Touchpoint 2: Midterm Report</h2>
+<p>The goal for this touchpoint was to clean and pre-process our data, 
+  as well as perform unsupervised learning algorithms.</p>
+
+<h2>Data Cleaning and Pre-processing</h2>
+<p>Our country dataset had many features, some of which were extraneous.
+  In order to focus on relevant features, we removed the following columns:</p>
+<ul>
+  <li>Mobile-cellular subscriptions</li>
+  <li>Individuals using the Internet</li>
+  <li>Balance of payments, current account (millions US)</li>
+  <li>Threatened species</li>
+  <li>Forested Area</li>
+  <li>CO2 emissions</li>
+  <li>Seats held by women in national parliaments %</li>
+  <li>Refugees and others of concern to UNHCR (in thousands)</li>
+  <li>International migrant stock</li>
+  <li>Labour force participation (female/male pop. %)</li>
+  <li>Net Official Development Assist. received (% of GNI)</li>
+  <li>Infant mortality rate</li>
+  <li>International migrant stock</li>
+  <li>Fertility rate</li>
+  <li>Sex ratio</li>
+</ul>
+<p>Next, we had to deal with misformatted and missing data.</p>
+
+<h3>Misformatted Data</h3>
+<p>There were a few types of misformatted data in our initial country dataset.
+  Each country had a region feature (ex: CentralAmerica or NorthernAfrica).
+  To represent these features numerically instead of as a string, we one-hot encoded each country's region. 
+  We split each region name into an individual column, putting a 1 if the country was
+  from that region (0 if not). The next type of misformatted data was columns with multiple data 
+  values separated by a "/". For example, "Pop. using improved drinking water (urban, rural %)" with a value 
+  like "45.1/27". We separated this type of data into two columns, delimiting at the "/".</p>
+
+<h3>Missing Data</h3>
+<p>Throughout the dataset, there were many types of missing data. Examples include "...", "-99", "". 
+  There also were cells with "~0", "-~0.0", and "-~0". We replaced all the approximately 0 values with 0. 
+  Then, we filled in all the missing data values by using the K-nearest neighbors algorithm. For our k-value, 
+  we decided on using the square root of the number of datapoints we had. At the end, we had a clean dataset 
+  with purely numerical values.</p>
+
+<h3>Final Touches</h3>
+<p>Now that we had a clean country features dataset, we now had to merge it with a dataset containing Covid-19 data for countries. 
+Our Covid-19 dataset contained the number of cases in a country on every day starting from the beginning of the year. 
+Because countries had different dates of first reported infection, we reduced the data down into number of Covid-19 cases 
+5 days, 25 days, and 50 days after first infection. Then, we added these 3 columns as features to our cleaned country dataset.</p>
+
+
+<h2>Unsupervised Learning</h2>
+<p>Our goal for unsupervised learning was to cluster our countries, both with and without the Covid-19 features added.</p>
+<h3>DBSCAN</h3>
+<p>We performed the DBSCAN algorithm because we suspected there were strong outliers among the countries, for example the USA and China.</p>
+<img src="img/dbscan_clusters_with_outliers.png" alt="dbscan_clusters_with_outliers" style="width: 40%" />
+<img src="img/dbscan_clusters_without_outliers.png" alt="dbscan_clusters_without_outliers" style="width: 40%" />
+
+<p>As seen in the images, most of the countries are similar in terms of population and GDP, however there are a few outliers 
+  like the USA and China that are far removed from the majority of the others. These outliers represent countries with a large GDP and population. The yellow cluster includes Ghana, Mozambique, Nepal, and Yemen. 
+  The green cluster includes Hong Kong, Denmark, Ireland, Israel, and Singapore. The majority of other countries are in the purple cluster.</p>
+
+<h3>K-Means Clustering</h3>
+<!--TODO-->
+<h3>GMM</h3>
+<!--TODO-->
+<h3>Histograms</h3>
+<!--TODO-->
