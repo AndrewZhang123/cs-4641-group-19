@@ -173,7 +173,21 @@ Because countries had different dates of first reported infection, we reduced th
   The green cluster includes Hong Kong, Denmark, Ireland, Israel, and Singapore. The majority of other countries are in the purple cluster.</p>
 
 <h3>K-Means Clustering</h3>
-<!--TODO-->
+<p>We performed the kmeans algorithm on the dataset without the number of covid cases and with the number of covid cases after 5 days, 25 days, and 50 days. The first image is the clustering without covid cases and the second picture is with covid cases.</p>
+<img src="img/kmeans.png" alt="kmeans" style="width: 40%" />
+<img src="img/kmeans_covid.png" alt="kmeans_covid" style="width: 40%" />
+
+<p>We chose k-means clustering because it's a common clustering algorithm that we learned in class. We used the elbow method to determine the number of clusters, which is 9. For the clustering without covid cases,
+  countries seems to be grouped in terms of either common region and/or gross domestic product. For cluster 0, countries such as Japan, South Korea, Singapore, New Zealand, Netherlands, Hong Kong, Canada, Australia, United States, etc.
+  This seems to be clustering "First World" countries with higher values in GDP and trading rates. For cluster 1, countries such as Saint Lucia, Bahamas, Dominican Republican, Turks and Caicos Islands, United States Virgin Islands, etc.
+  This cluster seems to be grouping island countries located in the Carribean Sea. The rest of the clusters are grouped in respective to their GDP or to the regions that are closest to each other.
+  As for clustering with covid cases, there were 2 clusters that did not have any changes.
+  One of the cluster consists of countries located in the Carribean Sea and the other cluster consists of European countries located near the Mediterranean Sea.
+  For the rest of the clusters, there is a 4-12 differences between the results from kmeans without covid versus with covid. Countries seems to be clustered geographically closer to countries near them. For example, Afghanistan, Bangladesh, Cambodia, and Bhutan were in the 
+  same cluster without covid cases, but were then put into clusters to countries that were closer to them with covid cases.
+  Argentina, Colombia, and Bolivia were in the same cluster as a handful of Southeast Asian countries without covid, but were grouped into clusters with South American countries with covid.
+</p>
+
 <h3>GMM</h3>
 <!--TODO-->
 <h3>Histograms</h3>
