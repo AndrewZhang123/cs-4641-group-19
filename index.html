@@ -164,13 +164,25 @@ Because countries had different dates of first reported infection, we reduced th
 <h2>Unsupervised Learning</h2>
 <p>Our goal for unsupervised learning was to cluster our countries, both with and without the Covid-19 features added.</p>
 <h3>DBSCAN</h3>
-<p>We performed the DBSCAN algorithm because we suspected there were strong outliers among the countries, for example the USA and China.</p>
-<img src="img/dbscan_clusters_with_outliers.png" alt="dbscan_clusters_with_outliers" style="width: 40%" />
-<img src="img/dbscan_clusters_without_outliers.png" alt="dbscan_clusters_without_outliers" style="width: 40%" />
+<p>We performed the DBSCAN algorithm because we suspected there were strong outliers among the countries, for example the USA and China.
+   Here is our results for performing DBSCAN on GDP and Population of countries.
+</p>
+<img src="img/dbscan_clusters_with_outliers.png" alt="dbscan_clusters_with_outliers" style="width: 30%" />
+<img src="img/dbscan_clusters_without_outliers.png" alt="dbscan_clusters_without_outliers" style="width: 30%" />
+<img src="img/dbscan-gdp-population-clusters.png" alt="dbscan-gdp-population-clusters" style="width: 30%" />
 
 <p>As seen in the images, most of the countries are similar in terms of population and GDP, however there are a few outliers 
-  like the USA and China that are far removed from the majority of the others. These outliers represent countries with a large GDP and population. The yellow cluster includes Ghana, Mozambique, Nepal, and Yemen. 
+  like the USA and China that are far removed from the majority of the others because they have much higher GDP and population. These outliers represent countries with a large GDP and population. The yellow cluster includes Ghana, Mozambique, Nepal, and Yemen. 
   The green cluster includes Hong Kong, Denmark, Ireland, Israel, and Singapore. The majority of other countries are in the purple cluster.</p>
+
+<p>We also performed DBSCAN using the same eps parameter (0.04) and minValues parametr (4). This time, we taking into account all features of the countries along with the COVID cases. The results are below: </p>
+
+<img src="img/dbscan-all-features-outliers.png" alt="dbscan-all-features-outliers" style="width: 30%" />
+<img src="img/dbscan-all-features-no-outliers.png" alt="dbscan-all-features-no-outliers" style="width: 30%" />
+<img src="img/dbscan-all-features-clusters.png" alt="dbscan-all-features-clusters" style="width: 30%" />
+
+<p>The clusters are extremely similar, indicating that GDP/Population are good measures of similarity between countries.
+The green cluster lost one country (Hong Kong). Overall, there were also less outliers (69 compared to 73).</p>
 
 <h3>K-Means Clustering</h3>
 <p>We performed the kmeans algorithm on the dataset without the number of covid cases and with the number of covid cases after 5 days, 25 days, and 50 days. The first image is the clustering without covid cases and the second picture is with covid cases.</p>
