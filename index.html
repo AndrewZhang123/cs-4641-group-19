@@ -202,7 +202,17 @@ The green cluster lost one country (Hong Kong). Overall, there were also less ou
 
 <h3>GMM</h3>
 <!--TODO-->
-<p>We then performed the GMM algorithm on the datasets with and without covid. The first step was to find how many components we should use to optimize our model. Shown below are two graphs displaying the AIC() and BIC</p>
+<p>We then performed the GMM algorithm on the datasets with and without covid. The first step was to find how many components we should use to optimize our models. Shown below are two graphs displaying the AIC (Akaike information criterion) and BIC (Bayesian information criterion). AIC is suggesting that we choose 12 components to get the best results. However, BIC is minimized at 3 components. Since BIC is proposing a simpler model, that is what we went with.</p>
+<img src="img/AIC_BIC.png" alt="AIC_BIC" style="width: 40%" />
+<img src="img/AIC_BIC_Covid.png" alt="AIC_BIC_Covid" style="width: 40%" />
+
+<p>Next, we had to create the models and analyze the clusters. Our results are shown below. Evaluating the dataset without covid, we can see the clusters are computed by having similar features like GDP, surface area, population, international trade, etc. 
+  Since only 3 clusters were made, the data does vary with the PCA, but overall produced promising results. Now, interpreting the dataset with covid, we see a similar output. However, it is interesting to note that cluster 0 and cluster 2 have been switched.
+  While accounting for covid, many countries which are closer together were now being grouped together. The covid data changed the PCA, enhancing the clusters and providing an improved model.
+</p>
+<img src="img/GMM_clustering.png" alt="GMM_clustering" style="width: 40%" />
+<img src="img/GMM_Clustering_Covid.png" alt="GMM_Clustering_Covid" style="width: 40%" />
+
 <h3>Histograms</h3>
 <p>We made histograms of the 5 highest variance features in our dataset to get a better understanding of the distribution of our data.</p>
 
