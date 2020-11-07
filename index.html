@@ -213,6 +213,13 @@ The green cluster lost one country (Hong Kong). Overall, there were also less ou
 <img src="img/GMM_clustering.png" alt="GMM_clustering" style="width: 40%" />
 <img src="img/GMM_Clustering_Covid.png" alt="GMM_Clustering_Covid" style="width: 40%" />
 
+<h3>K-Means vs. GMM</h3>
+<p>
+  We ran kmeans with 3 clusters and the countries in each cluster matches with the countries in each cluster from gmm, with a difference of 1-6 countries for each cluster.
+  Kmeans is strictly based off distance of the clusters and gmm is based off of the gaussian distribution. Kmeans is a 'hard' assignment while gmm is a 'soft' assignment
+  and because of this gmm is subjective to randomness, which affects the differences of 1-6 countries in each cluster.
+</p>
+
 <h3>Histograms</h3>
 <p>We made histograms of the 5 highest variance features in our dataset to get a better understanding of the distribution of our data.</p>
 
