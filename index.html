@@ -164,18 +164,62 @@ Because countries had different dates of first reported infection, we reduced th
 <h2>Unsupervised Learning</h2>
 <p>Our goal for unsupervised learning was to cluster our countries, both with and without the Covid-19 features added.</p>
 <h3>DBSCAN</h3>
-<p>We performed the DBSCAN algorithm because we suspected there were strong outliers among the countries, for example the USA and China.</p>
-<img src="img/dbscan_clusters_with_outliers.png" alt="dbscan_clusters_with_outliers" style="width: 40%" />
-<img src="img/dbscan_clusters_without_outliers.png" alt="dbscan_clusters_without_outliers" style="width: 40%" />
+<p>We performed the DBSCAN algorithm because we suspected there were strong outliers among the countries, for example the USA and China.
+   Here is our results for performing DBSCAN on GDP and Population of countries.
+</p>
+<img src="img/dbscan_clusters_with_outliers.png" alt="dbscan_clusters_with_outliers" style="width: 30%" />
+<img src="img/dbscan_clusters_without_outliers.png" alt="dbscan_clusters_without_outliers" style="width: 30%" />
+<img src="img/dbscan-gdp-population-clusters.png" alt="dbscan-gdp-population-clusters" style="width: 30%" />
 
 <p>As seen in the images, most of the countries are similar in terms of population and GDP, however there are a few outliers 
-  like the USA and China that are far removed from the majority of the others. These outliers represent countries with a large GDP and population. The yellow cluster includes Ghana, Mozambique, Nepal, and Yemen. 
+  like the USA and China that are far removed from the majority of the others because they have much higher GDP and population. These outliers represent countries with a large GDP and population. The yellow cluster includes Ghana, Mozambique, Nepal, and Yemen. 
   The green cluster includes Hong Kong, Denmark, Ireland, Israel, and Singapore. The majority of other countries are in the purple cluster.</p>
 
+<p>We also performed DBSCAN using the same eps parameter (0.04) and minValues parametr (4). This time, we taking into account all features of the countries along with the COVID cases. The results are below: </p>
+
+<img src="img/dbscan-all-features-outliers.png" alt="dbscan-all-features-outliers" style="width: 30%" />
+<img src="img/dbscan-all-features-no-outliers.png" alt="dbscan-all-features-no-outliers" style="width: 30%" />
+<img src="img/dbscan-all-features-clusters.png" alt="dbscan-all-features-clusters" style="width: 30%" />
+
+<p>The clusters are extremely similar, indicating that GDP/Population are good measures of similarity between countries.
+The green cluster lost one country (Hong Kong). Overall, there were also less outliers (69 compared to 73).</p>
+
 <h3>K-Means Clustering</h3>
-<!--TODO-->
+<p>We performed the kmeans algorithm on the dataset without the number of covid cases and with the number of covid cases after 5 days, 25 days, and 50 days. The first image is the clustering without covid cases and the second picture is with covid cases.</p>
+<img src="img/kmeans.png" alt="kmeans" style="width: 40%" />
+<img src="img/kmeans_covid.png" alt="kmeans_covid" style="width: 40%" />
+
+<p>We chose k-means clustering because it's a common clustering algorithm that we learned in class. We used the elbow method to determine the number of clusters, which is 9. For the clustering without covid cases,
+  countries seems to be grouped in terms of either common region and/or gross domestic product. For cluster 0, countries such as Japan, South Korea, Singapore, New Zealand, Netherlands, Hong Kong, Canada, Australia, United States, etc.
+  This seems to be clustering "First World" countries with higher values in GDP and trading rates. For cluster 1, countries such as Saint Lucia, Bahamas, Dominican Republican, Turks and Caicos Islands, United States Virgin Islands, etc.
+  This cluster seems to be grouping island countries located in the Carribean Sea. The rest of the clusters are grouped in respective to their GDP or to the regions that are closest to each other.
+  As for clustering with covid cases, there were 2 clusters that did not have any changes.
+  One of the cluster consists of countries located in the Carribean Sea and the other cluster consists of European countries located near the Mediterranean Sea.
+  For the rest of the clusters, there is a 4-12 differences between the results from kmeans without covid versus with covid. Countries seems to be clustered geographically closer to countries near them. For example, Afghanistan, Bangladesh, Cambodia, and Bhutan were in the 
+  same cluster without covid cases, but were then put into clusters to countries that were closer to them with covid cases.
+  Argentina, Colombia, and Bolivia were in the same cluster as a handful of Southeast Asian countries without covid, but were grouped into clusters with South American countries with covid.
+</p>
+
 <h3>GMM</h3>
 <!--TODO-->
+<p>We then performed the GMM algorithm on the datasets with and without covid. The first step was to find how many components we should use to optimize our models. Shown below are two graphs displaying the AIC (Akaike information criterion) and BIC (Bayesian information criterion). AIC is suggesting that we choose 12 components to get the best results. However, BIC is minimized at 3 components. Since BIC is proposing a simpler model, that is what we went with.</p>
+<img src="img/AIC_BIC.png" alt="AIC_BIC" style="width: 40%" />
+<img src="img/AIC_BIC_Covid.png" alt="AIC_BIC_Covid" style="width: 40%" />
+
+<p>Next, we had to create the models and analyze the clusters. Our results are shown below. Evaluating the dataset without covid, we can see the clusters are computed by having similar features like GDP, surface area, population, international trade, etc. 
+  Since only 3 clusters were made, the data does vary with the PCA, but overall produced promising results. Now, interpreting the dataset with covid, we see a similar output. However, it is interesting to note that cluster 0 and cluster 2 have been switched.
+  While accounting for covid, many countries which are closer together were now being grouped together. The covid data changed the PCA, enhancing the clusters and providing an improved model.
+</p>
+<img src="img/GMM_clustering.png" alt="GMM_clustering" style="width: 40%" />
+<img src="img/GMM_Clustering_Covid.png" alt="GMM_Clustering_Covid" style="width: 40%" />
+
+<h3>K-Means vs. GMM</h3>
+<p>
+  We ran kmeans with 3 clusters and the countries in each cluster matches with the countries in each cluster from gmm, with a difference of 1-6 countries for each cluster.
+  Kmeans is strictly based off distance of the clusters and gmm is based off of the gaussian distribution. Kmeans is a 'hard' assignment while gmm is a 'soft' assignment
+  and because of this gmm is subjective to randomness, which affects the differences of 1-6 countries in each cluster.
+</p>
+
 <h3>Histograms</h3>
 <p>We made histograms of the 5 highest variance features in our dataset to get a better understanding of the distribution of our data.</p>
 
