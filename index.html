@@ -2,7 +2,11 @@
 
 <h2>CS 4641 - Group 19</h2>
 <p>Predicting COVID-19 Spread Based on Country’s Metrics</p>
-<p><a href="https://github.com/AndrewZhang123/cs-4641-group-19" target="_blank">GitHub Repo</a></p>
+<p>
+  <a href="https://github.com/AndrewZhang123/cs-4641-group-19" target="_blank"
+    >GitHub Repo</a
+  >
+</p>
 <h3>Datasets:</h3>
 <ul>
   <li>
@@ -113,12 +117,16 @@
 
 <!-------------------------------------------------------------->
 <h2>Touchpoint 2: Midterm Report</h2>
-<p>The goal for this touchpoint was to clean and pre-process our data, 
-  as well as perform unsupervised learning algorithms.</p>
+<p>
+  The goal for this touchpoint was to clean and pre-process our data, as well as
+  perform unsupervised learning algorithms.
+</p>
 
 <h2>Data Cleaning and Pre-processing</h2>
-<p>Our country dataset had many features, some of which were extraneous.
-  In order to focus on relevant features, we removed the following columns:</p>
+<p>
+  Our country dataset had many features, some of which were extraneous. In order
+  to focus on relevant features, we removed the following columns:
+</p>
 <ul>
   <li>Mobile-cellular subscriptions</li>
   <li>Individuals using the Internet</li>
@@ -139,117 +147,285 @@
 <p>Next, we had to deal with misformatted and missing data.</p>
 
 <h3>Misformatted Data</h3>
-<p>There were a few types of misformatted data in our initial country dataset.
-  Each country had a region feature (ex: CentralAmerica or NorthernAfrica).
-  To represent these features numerically instead of as a string, we one-hot encoded each country's region. 
-  We split each region name into an individual column, putting a 1 if the country was
-  from that region (0 if not). The next type of misformatted data was columns with multiple data 
-  values separated by a "/". For example, "Pop. using improved drinking water (urban, rural %)" with a value 
-  like "45.1/27". We separated this type of data into two columns, delimiting at the "/".</p>
+<p>
+  There were a few types of misformatted data in our initial country dataset.
+  Each country had a region feature (ex: CentralAmerica or NorthernAfrica). To
+  represent these features numerically instead of as a string, we one-hot
+  encoded each country's region. We split each region name into an individual
+  column, putting a 1 if the country was from that region (0 if not). The next
+  type of misformatted data was columns with multiple data values separated by a
+  "/". For example, "Pop. using improved drinking water (urban, rural %)" with a
+  value like "45.1/27". We separated this type of data into two columns,
+  delimiting at the "/".
+</p>
 
 <h3>Missing Data</h3>
-<p>Throughout the dataset, there were many types of missing data. Examples include "...", "-99", "". 
-  There also were cells with "~0", "-~0.0", and "-~0". We replaced all the approximately 0 values with 0. 
-  Then, we filled in all the missing data values by using the K-nearest neighbors algorithm. For our k-value, 
-  we decided on using the square root of the number of datapoints we had. At the end, we had a clean dataset 
-  with purely numerical values.</p>
+<p>
+  Throughout the dataset, there were many types of missing data. Examples
+  include "...", "-99", "". There also were cells with "~0", "-~0.0", and "-~0".
+  We replaced all the approximately 0 values with 0. Then, we filled in all the
+  missing data values by using the K-nearest neighbors algorithm. For our
+  k-value, we decided on using the square root of the number of datapoints we
+  had. At the end, we had a clean dataset with purely numerical values.
+</p>
 
 <h3>Final Touches</h3>
-<p>Now that we had a clean country features dataset, we now had to merge it with a dataset containing Covid-19 data for countries. 
-Our Covid-19 dataset contained the number of cases in a country on every day starting from the beginning of the year. 
-Because countries had different dates of first reported infection, we reduced the data down into number of Covid-19 cases 
-5 days, 25 days, and 50 days after first infection. Then, we added these 3 columns as features to our cleaned country dataset.</p>
-
+<p>
+  Now that we had a clean country features dataset, we now had to merge it with
+  a dataset containing Covid-19 data for countries. Our Covid-19 dataset
+  contained the number of cases in a country on every day starting from the
+  beginning of the year. Because countries had different dates of first reported
+  infection, we reduced the data down into number of Covid-19 cases 5 days, 25
+  days, and 50 days after first infection. Then, we added these 3 columns as
+  features to our cleaned country dataset.
+</p>
 
 <h2>Unsupervised Learning</h2>
-<p>Our goal for unsupervised learning was to cluster our countries, both with and without the Covid-19 features added.</p>
-<h3>DBSCAN</h3>
-<p>We performed the DBSCAN algorithm because we suspected there were strong outliers among the countries, for example the USA and China.
-   Here is our results for performing DBSCAN on GDP and Population of countries.
+<p>
+  Our goal for unsupervised learning was to cluster our countries, both with and
+  without the Covid-19 features added.
 </p>
-<img src="img/dbscan_clusters_with_outliers.png" alt="dbscan_clusters_with_outliers" style="width: 30%" />
-<img src="img/dbscan_clusters_without_outliers.png" alt="dbscan_clusters_without_outliers" style="width: 30%" />
-<img src="img/dbscan-gdp-population-clusters.png" alt="dbscan-gdp-population-clusters" style="width: 30%" />
+<h3>DBSCAN</h3>
+<p>
+  We performed the DBSCAN algorithm because we suspected there were strong
+  outliers among the countries, for example the USA and China. Here is our
+  results for performing DBSCAN on GDP and Population of countries.
+</p>
+<img
+  src="img/dbscan_clusters_with_outliers.png"
+  alt="dbscan_clusters_with_outliers"
+  style="width: 30%"
+/>
+<img
+  src="img/dbscan_clusters_without_outliers.png"
+  alt="dbscan_clusters_without_outliers"
+  style="width: 30%"
+/>
+<img
+  src="img/dbscan-gdp-population-clusters.png"
+  alt="dbscan-gdp-population-clusters"
+  style="width: 30%"
+/>
 
-<p>As seen in the images, most of the countries are similar in terms of population and GDP, however there are a few outliers 
-  like the USA and China that are far removed from the majority of the others because they have much higher GDP and population. These outliers represent countries with a large GDP and population. The yellow cluster includes Ghana, Mozambique, Nepal, and Yemen. 
-  The green cluster includes Hong Kong, Denmark, Ireland, Israel, and Singapore. The majority of other countries are in the purple cluster.</p>
+<p>
+  As seen in the images, most of the countries are similar in terms of
+  population and GDP, however there are a few outliers like the USA and China
+  that are far removed from the majority of the others because they have much
+  higher GDP and population. These outliers represent countries with a large GDP
+  and population. The yellow cluster includes Ghana, Mozambique, Nepal, and
+  Yemen. The green cluster includes Hong Kong, Denmark, Ireland, Israel, and
+  Singapore. The majority of other countries are in the purple cluster.
+</p>
 
-<p>We also performed DBSCAN using the same eps parameter (0.04) and minValues parametr (4). This time, we taking into account all features of the countries along with the COVID cases. The results are below: </p>
+<p>
+  We also performed DBSCAN using the same eps parameter (0.04) and minValues
+  parametr (4). This time, we taking into account all features of the countries
+  along with the COVID cases. The results are below:
+</p>
 
-<img src="img/dbscan-all-features-outliers.png" alt="dbscan-all-features-outliers" style="width: 30%" />
-<img src="img/dbscan-all-features-no-outliers.png" alt="dbscan-all-features-no-outliers" style="width: 30%" />
-<img src="img/dbscan-all-features-clusters.png" alt="dbscan-all-features-clusters" style="width: 30%" />
+<img
+  src="img/dbscan-all-features-outliers.png"
+  alt="dbscan-all-features-outliers"
+  style="width: 30%"
+/>
+<img
+  src="img/dbscan-all-features-no-outliers.png"
+  alt="dbscan-all-features-no-outliers"
+  style="width: 30%"
+/>
+<img
+  src="img/dbscan-all-features-clusters.png"
+  alt="dbscan-all-features-clusters"
+  style="width: 30%"
+/>
 
-<p>The clusters are extremely similar, indicating that GDP/Population are good measures of similarity between countries.
-The green cluster lost one country (Hong Kong). Overall, there were also less outliers (69 compared to 73).</p>
+<p>
+  The clusters are extremely similar, indicating that GDP/Population are good
+  measures of similarity between countries. The green cluster lost one country
+  (Hong Kong). Overall, there were also less outliers (69 compared to 73).
+</p>
 
 <h3>K-Means Clustering</h3>
-<p>We performed the kmeans algorithm on the dataset without the number of covid cases and with the number of covid cases after 5 days, 25 days, and 50 days. The first image is the clustering without covid cases and the second picture is with covid cases.</p>
+<p>
+  We performed the kmeans algorithm on the dataset without the number of covid
+  cases and with the number of covid cases after 5 days, 25 days, and 50 days.
+  The first image is the clustering without covid cases and the second picture
+  is with covid cases.
+</p>
 <img src="img/kmeans.png" alt="kmeans" style="width: 40%" />
 <img src="img/kmeans_covid.png" alt="kmeans_covid" style="width: 40%" />
 
-<p>We chose k-means clustering because it's a common clustering algorithm that we learned in class. We used the elbow method to determine the number of clusters, which is 9. For the clustering without covid cases,
-  countries seems to be grouped in terms of either common region and/or gross domestic product. For cluster 0, countries such as Japan, South Korea, Singapore, New Zealand, Netherlands, Hong Kong, Canada, Australia, United States, etc.
-  This seems to be clustering "First World" countries with higher values in GDP and trading rates. For cluster 1, countries such as Saint Lucia, Bahamas, Dominican Republican, Turks and Caicos Islands, United States Virgin Islands, etc.
-  This cluster seems to be grouping island countries located in the Carribean Sea. The rest of the clusters are grouped in respective to their GDP or to the regions that are closest to each other.
-  As for clustering with covid cases, there were 2 clusters that did not have any changes.
-  One of the cluster consists of countries located in the Carribean Sea and the other cluster consists of European countries located near the Mediterranean Sea.
-  For the rest of the clusters, there is a 4-12 differences between the results from kmeans without covid versus with covid. Countries seems to be clustered geographically closer to countries near them. For example, Afghanistan, Bangladesh, Cambodia, and Bhutan were in the 
-  same cluster without covid cases, but were then put into clusters to countries that were closer to them with covid cases.
-  Argentina, Colombia, and Bolivia were in the same cluster as a handful of Southeast Asian countries without covid, but were grouped into clusters with South American countries with covid.
+<p>
+  We chose k-means clustering because it's a common clustering algorithm that we
+  learned in class. We used the elbow method to determine the number of
+  clusters, which is 9. For the clustering without covid cases, countries seems
+  to be grouped in terms of either common region and/or gross domestic product.
+  For cluster 0, countries such as Japan, South Korea, Singapore, New Zealand,
+  Netherlands, Hong Kong, Canada, Australia, United States, etc. This seems to
+  be clustering "First World" countries with higher values in GDP and trading
+  rates. For cluster 1, countries such as Saint Lucia, Bahamas, Dominican
+  Republican, Turks and Caicos Islands, United States Virgin Islands, etc. This
+  cluster seems to be grouping island countries located in the Carribean Sea.
+  The rest of the clusters are grouped in respective to their GDP or to the
+  regions that are closest to each other. As for clustering with covid cases,
+  there were 2 clusters that did not have any changes. One of the cluster
+  consists of countries located in the Carribean Sea and the other cluster
+  consists of European countries located near the Mediterranean Sea. For the
+  rest of the clusters, there is a 4-12 differences between the results from
+  kmeans without covid versus with covid. Countries seems to be clustered
+  geographically closer to countries near them. For example, Afghanistan,
+  Bangladesh, Cambodia, and Bhutan were in the same cluster without covid cases,
+  but were then put into clusters to countries that were closer to them with
+  covid cases. Argentina, Colombia, and Bolivia were in the same cluster as a
+  handful of Southeast Asian countries without covid, but were grouped into
+  clusters with South American countries with covid.
 </p>
 
 <h3>GMM</h3>
 <!--TODO-->
-<p>We then performed the GMM algorithm on the datasets with and without covid. The first step was to find how many components we should use to optimize our models. Shown below are two graphs displaying the AIC (Akaike information criterion) and BIC (Bayesian information criterion). AIC is suggesting that we choose 12 components to get the best results. However, BIC is minimized at 3 components. Since BIC is proposing a simpler model, that is what we went with.</p>
+<p>
+  We then performed the GMM algorithm on the datasets with and without covid.
+  The first step was to find how many components we should use to optimize our
+  models. Shown below are two graphs displaying the AIC (Akaike information
+  criterion) and BIC (Bayesian information criterion). AIC is suggesting that we
+  choose 12 components to get the best results. However, BIC is minimized at 3
+  components. Since BIC is proposing a simpler model, that is what we went with.
+</p>
 <img src="img/AIC_BIC.png" alt="AIC_BIC" style="width: 40%" />
 <img src="img/AIC_BIC_Covid.png" alt="AIC_BIC_Covid" style="width: 40%" />
 
-<p>Next, we had to create the models and analyze the clusters. Our results are shown below. Evaluating the dataset without covid, we can see the clusters are computed by having similar features like GDP, surface area, population, international trade, etc. 
-  Since only 3 clusters were made, the data does vary with the PCA, but overall produced promising results. Now, interpreting the dataset with covid, we see a similar output. However, it is interesting to note that cluster 0 and cluster 2 have been switched.
-  While accounting for covid, many countries which are closer together were now being grouped together. The covid data changed the PCA, enhancing the clusters and providing an improved model.
+<p>
+  Next, we had to create the models and analyze the clusters. Our results are
+  shown below. Evaluating the dataset without covid, we can see the clusters are
+  computed by having similar features like GDP, surface area, population,
+  international trade, etc. Since only 3 clusters were made, the data does vary
+  with the PCA, but overall produced promising results. Now, interpreting the
+  dataset with covid, we see a similar output. However, it is interesting to
+  note that cluster 0 and cluster 2 have been switched. While accounting for
+  covid, many countries which are closer together were now being grouped
+  together. The covid data changed the PCA, enhancing the clusters and providing
+  an improved model.
 </p>
 <img src="img/GMM_clustering.png" alt="GMM_clustering" style="width: 40%" />
-<img src="img/GMM_Clustering_Covid.png" alt="GMM_Clustering_Covid" style="width: 40%" />
+<img
+  src="img/GMM_Clustering_Covid.png"
+  alt="GMM_Clustering_Covid"
+  style="width: 40%"
+/>
 
 <h3>K-Means vs. GMM</h3>
 <p>
-  We ran kmeans with 3 clusters and the countries in each cluster matches with the countries in each cluster from gmm, with a difference of 1-6 countries for each cluster.
-  Kmeans is strictly based off distance of the clusters and gmm is based off of the gaussian distribution. Kmeans is a 'hard' assignment while gmm is a 'soft' assignment
-  and because of this gmm is subjective to randomness, which affects the differences of 1-6 countries in each cluster.
+  We ran kmeans with 3 clusters and the countries in each cluster matches with
+  the countries in each cluster from gmm, with a difference of 1-6 countries for
+  each cluster. Kmeans is strictly based off distance of the clusters and gmm is
+  based off of the gaussian distribution. Kmeans is a 'hard' assignment while
+  gmm is a 'soft' assignment and because of this gmm is subjective to
+  randomness, which affects the differences of 1-6 countries in each cluster.
 </p>
 
 <h3>Histograms</h3>
-<p>We made histograms of the 5 highest variance features in our dataset to get a better understanding of the distribution of our data.</p>
+<p>
+  We made histograms of the 5 highest variance features in our dataset to get a
+  better understanding of the distribution of our data.
+</p>
 
-<img src="img/RuralDrinkingWater5.png" alt="Rural Improved Drinking Water 5 Bins" style="width: 40%" />
-This was our highest variance feature. A little over half of countries have clean drinking water widely available in rural areas. However, the remainder of the countries are relatively evenly distributed between 0 to 80 percent of the population using improved drinking water. Access to sanitary water helps prevent disease in general, and making sure it is clean would prevent an avenue COVID-19 has for spreading. However, being rural, it's also possible that the impact may be lessened due to people being more distanced by nature. It will be interesting to see how well this serves as a predictor for how covid spreads in a country. 
+<img
+  src="img/RuralDrinkingWater5.png"
+  alt="Rural Improved Drinking Water 5 Bins"
+  style="width: 40%"
+/>
+This was our highest variance feature. A little over half of countries have
+clean drinking water widely available in rural areas. However, the remainder of
+the countries are relatively evenly distributed between 0 to 80 percent of the
+population using improved drinking water. Access to sanitary water helps prevent
+disease in general, and making sure it is clean would prevent an avenue COVID-19
+has for spreading. However, being rural, it's also possible that the impact may
+be lessened due to people being more distanced by nature. It will be interesting
+to see how well this serves as a predictor for how covid spreads in a country.
 
-<img src="img/UrbanDrinkingWater5.png" alt="Urban Improved Drinking Water 5 Bins" style="width: 40%" />
+<img
+  src="img/UrbanDrinkingWater5.png"
+  alt="Urban Improved Drinking Water 5 Bins"
+  style="width: 40%"
+/>
 
-<p>This was our second highest variance feature. It follows a similar distribution to rural drinking water, although even more countries fall into the 80-100% bin. This makes sense, as countries with the infrastructures for clean rural drinking water are likely to have that in place in cities as well, and countries without the rural infrastructure may have it only in their cities. Lack of clean water in an urban environment is ikely even more of a problem than lack of clean water in a rural environment.</p>
+<p>
+  This was our second highest variance feature. It follows a similar
+  distribution to rural drinking water, although even more countries fall into
+  the 80-100% bin. This makes sense, as countries with the infrastructures for
+  clean rural drinking water are likely to have that in place in cities as well,
+  and countries without the rural infrastructure may have it only in their
+  cities. Lack of clean water in an urban environment is ikely even more of a
+  problem than lack of clean water in a rural environment.
+</p>
 <img src="img/YoungAge5.png" alt="Under 14 5 bins" style="width: 40%" />
 
-<p>This was our third highest variance feature. Although more countries tend to have a low percentage of people under 14, there are still a little over 20 countries with between 42.5 and 50% and around 80 between 27.5 and 42.5. Countries with a larger amount of children may be at risk of COVID-19 spreading faster as children may be less careful and interact with many people through school or other activities. However, it is also another way to contextualize cases as children are often less at risk of serious danger when contracting COVID-19.</p>
-<img src="img/Urban8.png" alt="Percent Population Urban 8 Bins" style="width: 40%" />
+<p>
+  This was our third highest variance feature. Although more countries tend to
+  have a low percentage of people under 14, there are still a little over 20
+  countries with between 42.5 and 50% and around 80 between 27.5 and 42.5.
+  Countries with a larger amount of children may be at risk of COVID-19
+  spreading faster as children may be less careful and interact with many people
+  through school or other activities. However, it is also another way to
+  contextualize cases as children are often less at risk of serious danger when
+  contracting COVID-19.
+</p>
+<img
+  src="img/Urban8.png"
+  alt="Percent Population Urban 8 Bins"
+  style="width: 40%"
+/>
 
-<p>This was our fourth highest variance feature. Very few countries exhibited extremely low urban population percentages, with around 140 countries sitting between 40% and 100% urban. That number drops for the bins of countries with a smaller percent. Urban locations can be COVID-19 hotspots as they are more likely destinations for travelers, and have a large number of people in close proximity, aiding in the spread of the disease and increase of casen numbers. </p>
+<p>
+  This was our fourth highest variance feature. Very few countries exhibited
+  extremely low urban population percentages, with around 140 countries sitting
+  between 40% and 100% urban. That number drops for the bins of countries with a
+  smaller percent. Urban locations can be COVID-19 hotspots as they are more
+  likely destinations for travelers, and have a large number of people in close
+  proximity, aiding in the spread of the disease and increase of casen numbers.
+</p>
 
 <img src="img/OldAge8.png" alt="Over 60 8 Bins" style="width: 40%" />
-<p>This was our fifth highest variance feature. It follows  similar distribution to the young age distribution. However, older people tend to be more at risk upon contracting COVID-19, and even places with lower case numbers may be more heavily affected if they have a larger elderly proportion </p>
+<p>
+  This was our fifth highest variance feature. It follows similar distribution
+  to the young age distribution. However, older people tend to be more at risk
+  upon contracting COVID-19, and even places with lower case numbers may be more
+  heavily affected if they have a larger elderly proportion
+</p>
 
-<img src="img/popdensity10.png" alt="Population Density 10 Bins" style="width: 40%" />
-<img src="img/surfacearea10.png" alt="Surface Area 10 Bins" style="width: 40%" />
-<p>This was a feature we thought would be interesting to consider, as countries with a higher population density would probably have COVID-19 spread more rapidly. We found that the majority of countries had very similar population densities, and the majority of countries were also comparably sized, although there were a few countries with much higher population density (Monaco, Macao) as well as a few extremely large countries (Australia, Brazil, China, USA, Canada, Russia)</p>
+<img
+  src="img/popdensity10.png"
+  alt="Population Density 10 Bins"
+  style="width: 40%"
+/>
+<img
+  src="img/surfacearea10.png"
+  alt="Surface Area 10 Bins"
+  style="width: 40%"
+/>
+<p>
+  This was a feature we thought would be interesting to consider, as countries
+  with a higher population density would probably have COVID-19 spread more
+  rapidly. We found that the majority of countries had very similar population
+  densities, and the majority of countries were also comparably sized, although
+  there were a few countries with much higher population density (Monaco, Macao)
+  as well as a few extremely large countries (Australia, Brazil, China, USA,
+  Canada, Russia)
+</p>
 
-<p>We also generated a Correlation Matrix to better understand how our features were related. The highly correlated variables (|r| > .5) were logical. For example male tertiary eduction rate and female tertiary education rate had an r = 0.925538 and countries with large populations tended to have larger total imports and exports (r = 0.605799 and r = 0.605799, respectively).</p>
+<p>
+  We also generated a Correlation Matrix to better understand how our features
+  were related. The highly correlated variables (|r| > .5) were logical. For
+  example male tertiary eduction rate and female tertiary education rate had an
+  r = 0.925538 and countries with large populations tended to have larger total
+  imports and exports (r = 0.605799 and r = 0.605799, respectively).
+</p>
 
-<p> The correlation matrix is provided below (warning: it is very large)
+<p>The correlation matrix is provided below (warning: it is very large)</p>
 
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style="text-align: right">
       <th></th>
       <th>Surface area (km2)</th>
       <th>Population in thousands (2017)</th>
@@ -1696,3 +1872,43 @@ This was our highest variance feature. A little over half of countries have clea
     </tr>
   </tbody>
 </table>
+
+<!-------------------------------------------------------------->
+<h2>Touchpoint 3: Final Report</h2>
+<p>
+  The goal for this touchpoint was to perform supervised learning algorithms on
+  our cleaned data in order to predict the number of covid cases in a country x
+  days after first infection. We randomly split our data into 80% training data
+  and 20% test data. We also used the same training and test data across our
+  different algorithms so that we could compare results.
+</p>
+
+<h2>Neural Networks</h2>
+<p>
+  One method we chose was neural networks because it is a supervised learning
+  method that allows us to predict a final value based off of features.
+  Furthermore, we learned about them in class so we had a good foundation to
+  branch off of. We used a neural network with the features being the 58
+  different attributes of each country, and the label being the number of covid
+  cases after x number of days. We ran our model 3 separate times, where x
+  varied between 5, 25, and 50.
+</p>
+
+<p>
+  For the architecture of our neural network, we chose the ReLU activation
+  function because ReLU models generally perform well and avoid certain pitfalls
+  like the vanishing gradient problem. We initially ran our model with 2 hidden
+  layers and 32 nodes at each layer, but our results weren’t very informative.
+  So, we upped the number of hidden layers and nodes for our data, but this led
+  to overfitting. To compensate for this, we applied regularization techniques
+  to arrive at our final model. Graphs and results for each of these steps are
+  shown below.
+</p>
+
+<!-- TODO: Finish NN Analysis -->
+
+<h2>Linear Regression</h2>
+<!-- TODO: Finish -->
+
+<h2>Classification Algorithms</h2>
+<!-- TODO: Finish -->
