@@ -421,7 +421,391 @@ to see how well this serves as a predictor for how covid spreads in a country.
   imports and exports (r = 0.605799 and r = 0.605799, respectively).
 </p>
 
-<p>The correlation matrix is provided below (warning: it is very large)</p>
+<p>The correlation matrix is provided at the bottom. It has been moved so you don't need to scroll through it to access supervised learning results(warning: it is very large)</p>
+
+
+<!-------------------------------------------------------------->
+<h2>Touchpoint 3: Final Report</h2>
+<p>
+  The goal for this touchpoint was to perform supervised learning algorithms on
+  our cleaned data in order to predict the number of covid cases in a country x
+  days after first infection. We randomly split our data into 80% training data
+  and 20% test data. We also used the same training and test data across our
+  different algorithms so that we could compare results.
+</p>
+
+<h2>Neural Networks</h2>
+<p>
+  One method we chose was neural networks because it is a supervised learning
+  method that allows us to predict a final value based off of features.
+  Furthermore, we learned about them in class so we had a good foundation to
+  branch off of. We used a neural network with the features being the 58
+  different attributes of each country and the label being the number of covid
+  cases after x number of days. We ran our model 3 separate times, where x
+  varied between 5, 25, and 50.
+</p>
+
+<p>
+  For the architecture of our neural network, we chose the ReLU activation
+  function because ReLU models generally perform well and avoid certain pitfalls
+  like the vanishing gradient problem. We initially ran our model with 2 hidden
+  layers and 32 nodes at each layer, but our results weren’t very informative.
+  So, we upped the number of hidden layers and nodes for our data, but this led
+  to overfitting. To compensate for this, we applied regularization techniques
+  to arrive at our final model. Graphs and results for each of these steps are
+  shown below.
+</p>
+
+<p>
+  We chose an optimization function of “adam” from keras, since it is widely
+  used for regression in neural nets. We then chose mean squared error as our
+  loss function because we were working with a regression model and not a
+  classification one. We chose a linear activation for our output layer instead
+  of other choices like sigmoid, since our regression problem required an
+  unbounded function.
+</p>
+
+<h3>Results/Analysis</h3>
+<p>
+  These are our results and analysis from creating a neural network model and
+  running our training data through it. This analysis includes data from China.
+</p>
+
+<h4>Day 5:</h4>
+<ul>
+  <li>
+    For the 2 hidden layers/32 nodes a layer, we accrued a total loss of
+    1,173,031.375, indicating that our model performed on the poorer side. The
+    training ran for 100 epochs, and at each step our loss value decreases.
+  </li>
+  <img
+    src="img/NN/withChina/5-loss.png"
+    alt="img/NN/withChina/5-loss"
+    style="width: 80%"
+  />
+  <img
+    src="img/NN/withChina/5-graph1.png"
+    alt="img/NN/withChina/5-graph1"
+    style="width: 50%"
+  />
+  <li>
+    For the 5 hidden layers/1000 nodes a layer, which led to an overfitting of
+    our data. We suffered a greater loss starting at 40,589,744 and with each
+    epoch step, the loss did decrease linearly to 132,500.
+  </li>
+  <img
+    src="img/NN/withChina/5-graph2.png"
+    alt="img/NN/withChina/5-graph2"
+    style="width: 50%"
+  />
+  <li>
+    To account for the overfitting, we added regularization. We suffered from a
+    greater loss at the start at 40,589,536, which decreased each epoch step
+    until 177,400.9688.
+  </li>
+  <img
+    src="img/NN/withChina/5-graph3.png"
+    alt="img/NN/withChina/5-graph3"
+    style="width: 50%"
+  />
+</ul>
+
+<h4>Analysis:</h4>
+<p>
+  Our prediction output was hundreds times the actual number of cases for day 5.
+  For example, Guyana had 5 cases, but our neural net predicted that there
+  should be 918 cases for that day. Sudan had 1 case, but our neural net
+  predicted there should be 864. Mauritania had 1 case, but our model predicted
+  there should be 607 cases. The prediction is heavily skewed and does not
+  accurately reflect the total number of cases for day 5.
+</p>
+
+<h4>Day 25:</h4>
+<ul>
+  <img
+    src="img/NN/withChina/25-loss.png"
+    alt="img/NN/withChina/25-loss"
+    style="width: 80%"
+  />
+  <img
+    src="img/NN/withChina/25-graph1.png"
+    alt="img/NN/withChina/25-graph1"
+    style="width: 30%"
+  />
+  <img
+    src="img/NN/withChina/25-graph2.png"
+    alt="img/NN/withChina/25-graph2"
+    style="width: 30%"
+  />
+  <img
+    src="img/NN/withChina/25-graph3.png"
+    alt="img/NN/withChina/25-graph3"
+    style="width: 30%"
+  />
+  <li>
+    For the 2 hidden layers/32 nodes a layer, we accrued a total loss of
+    1,964,524.5
+  </li>
+  <li>
+    For the 5 hidden layers/1000 nodes a layer, we started with a loss of
+    128,204,568 and decreased to 201,917.625.
+  </li>
+  <li>
+    After accounting for overfitting, our losses were about the same as with
+    overfitting the data in part b) above.
+  </li>
+</ul>
+
+<h4>Analysis:</h4>
+<p>
+  Our prediction was off for day 25 covid cases. While Guyana, Sudan, and
+  Mauritania’s cases grew proportionally in both the predictions and the actual
+  data since day 5, the United Kingdom had 15,025 cases on day 25, but our model
+  predicted that it should be 1485.
+</p>
+
+<h4>Day 50:</h4>
+<ul>
+  <img
+    src="img/NN/withChina/50-loss.png"
+    alt="img/NN/withChina/50-loss"
+    style="width: 80%"
+  />
+  <img
+    src="img/NN/withChina/50-graph1.png"
+    alt="img/NN/withChina/50-graph1"
+    style="width: 30%"
+  />
+  <img
+    src="img/NN/withChina/50-graph2.png"
+    alt="img/NN/withChina/50-graph2"
+    style="width: 30%"
+  />
+  <img
+    src="img/NN/withChina/50-graph3.png"
+    alt="img/NN/withChina/50-graph3"
+    style="width: 30%"
+  />
+  <li>
+    For the 2 hidden layers/32 nodes a layer, we accrued a total loss of
+    390,577.0312.
+  </li>
+  <li>
+    For the 5 hidden layers/1000 nodes a layer, we started with a loss of
+    4,230,824,704 and decreased to 11,1263,208.
+  </li>
+  <li>
+    After accounting for overfitting, our losses were about the same as with
+    overfitting the data in part b) above.
+  </li>
+</ul>
+
+<h4>Analysis:</h4>
+<p>
+  Our prediction was more inaccurate compared to day 50 because cases were on
+  the rise for day 50, but our prediction model seemed to predict half of the
+  number of cases since day 25. For example, Guyana is predicted to have 535,
+  Sudan was supposed to have 554, and Mauritania should have 503 cases.
+</p>
+
+<h3>Re-evaluating our Model</h3>
+<p>
+  Once we obtained these results, we re-evaluated our model to look for
+  improvements. When looking back at our training data, we realized that one
+  huge outlier was China. While most countries only had a few dozen covid cases
+  at Day 5, China had over 80,000. We suspected that this huge number in China
+  biased our model. Thus, we re-ran our model after removing China from our
+  training set.
+</p>
+
+<h3>Results/Analysis Without China</h3>
+<h4>Day 5:</h4>
+<ul>
+  <img
+    src="img/NN/withoutChina/5-loss.png"
+    alt="img/NN/withoutChina/5-loss"
+    style="width: 80%"
+  />
+  <img
+    src="img/NN/withoutChina/5-graph1.png"
+    alt="img/NN/withoutChina/5-graph1"
+    style="width: 30%"
+  />
+  <img
+    src="img/NN/withoutChina/5-graph2.png"
+    alt="img/NN/withoutChina/5-graph2"
+    style="width: 30%"
+  />
+  <img
+    src="img/NN/withoutChina/5-graph3.png"
+    alt="img/NN/withoutChina/5-graph3"
+    style="width: 30%"
+  />
+  <li>
+    For the 2 hidden layers/32 nodes a layer, we accrued a total loss of
+    11,823.3936, indicating that our model performed on the more accurate side.
+    The training ran for 100 epochs, and at each step our loss value decreases.
+  </li>
+  <li>
+    For the 5 hidden layers/1000 nodes a layer, which led to an overfitting of
+    our data. We suffered a greater loss starting at 174,299.9062 and with each
+    epoch step, the loss did decrease linearly to 199.5918.
+  </li>
+  <li>
+    To account for the overfitting, we added regularization. We suffered from a
+    greater loss at the start at 173,467.0156 which decreased each epoch step
+    until 21,047.6465.
+  </li>
+</ul>
+
+<h4>Analysis:</h4>
+<p>
+  Our prediction was the most accurate for day 5 without China’s data as part of
+  the training set. Guyana had 5 cases, but should have 21, Sudan had 1, but
+  should have 3, the United Kingdom had 220, but should have 229, and Mauritania
+  had 1, but should have -15. Overall, the prediction was pretty close to the
+  actual cases of day 5.
+</p>
+
+<h4>Day 25:</h4>
+<ul>
+  <img
+    src="img/NN/withoutChina/25-loss.png"
+    alt="img/NN/withoutChina/25-loss"
+    style="width: 80%"
+  />
+  <img
+    src="img/NN/withoutChina/25-graph1.png"
+    alt="img/NN/withoutChina/25-graph1"
+    style="width: 30%"
+  />
+  <img
+    src="img/NN/withoutChina/25-graph2.png"
+    alt="img/NN/withoutChina/25-graph2"
+    style="width: 30%"
+  />
+  <img
+    src="img/NN/withoutChina/25-graph3.png"
+    alt="img/NN/withoutChina/25-graph3"
+    style="width: 30%"
+  />
+  <li>
+    For the 2 hidden layers/32 nodes a layer, we accrued a total loss of
+    8,670,628, indicating that our model performed on the poorer side. The
+    training ran for 100 epochs, and at each step our loss value decreases.
+  </li>
+  <li>
+    For the 5 hidden layers/1000 nodes a layer, which led to an overfitting of
+    our data. We suffered a greater loss starting at 8,727,872 and with each
+    epoch step, the loss did decrease linearly to 483,070.5938.
+  </li>
+  <li>
+    To account for the overfitting, we added regularization. We suffered from a
+    greater loss at the start at 87,281,136 which decreased each epoch step
+    until 4,451,134.5.
+  </li>
+</ul>
+
+<h4>Analysis:</h4>
+<p>
+  Our prediction for day 25 was inaccurate as the predicted number of cases were
+  much greater than the actual number of cases. Guyana had 37, but should be
+  1171, Sudan had 12, but should have 594, and the United Kingdom had 15,025,
+  but should have 5783.54. Some countries, such as France and Germany had covid
+  cases in the range of 80,000, which could be the outlier that influenced our
+  model’s prediction to skew the cases higher than the actual number of cases.
+</p>
+
+<h4>Day 50:</h4>
+<ul>
+  <img
+    src="img/NN/withoutChina/50-loss.png"
+    alt="img/NN/withoutChina/50-loss"
+    style="width: 80%"
+  />
+  <img
+    src="img/NN/withoutChina/50-graph1.png"
+    alt="img/NN/withoutChina/50-graph1"
+    style="width: 30%"
+  />
+  <img
+    src="img/NN/withoutChina/50-graph2.png"
+    alt="img/NN/withoutChina/50-graph2"
+    style="width: 30%"
+  />
+  <img
+    src="img/NN/withoutChina/50-graph3.png"
+    alt="img/NN/withoutChina/50-graph3"
+    style="width: 30%"
+  />
+  <li>
+    For the 2 hidden layers/32 nodes a layer, we accrued a total loss of
+    160,051,104, indicating that our model performed on the poorer side. The
+    training ran for 100 epochs, and at each step our loss value decreases.
+  </li>
+  <li>
+    For the 5 hidden layers/1000 nodes a layer, which led to an overfitting of
+    our data. We suffered a greater loss starting at 4,213,324,288 and with each
+    epoch step, the loss did decrease linearly to 44,437,860.
+  </li>
+  <li>
+    To account for the overfitting, we added regularization. We suffered from a
+    greater loss at the start at 4,213,406,464 which decreased each epoch step
+    until 161,831,648.
+  </li>
+</ul>
+
+<h4>Analysis:</h4>
+<p>
+  The prediction of cases for day 50 grew proportionally to the number of cases
+  for day 25. For example, Guyana had 82, but should have 6420, Sugan had 442,
+  but should have 3163, and the United Kingdom had 121,412, but should have
+  16,688. The prediction was still inaccurate, but that could be due to the
+  outliers such as France, Germany, and Italy for our training set.
+</p>
+
+<h3>Overall Analysis</h3>
+<p>
+  Overall, our neural network performed poorly (except for day 5’s prediction
+  without China’s data) and this could be due to our poor training data. Our
+  predictions for covid cases including China’s were the most inaccurate. The
+  predicted number cases were in the hundreds and thousands, all relatively
+  close to one another. However, the actual number of cases were not as
+  uniformed. Some countries only had a handful, while others had thousands of
+  cases. As for our data without China’s data, we suspected that since a handful
+  of countries have outliers with cases in the range of 80,000-100,000, while
+  most countries only hand a few thousands, this could be the reason why our
+  neural network also performed poorly. Countries such as France, Germany, and
+  Italy experienced a spike in covid cases, and as a result, countries that
+  share similar characteristics to those countries were expected to have the
+  same number of cases. The outliers also overpredicted for the rest of the
+  countries, a similar trends that we saw when we included China’s data in our
+  training sets.
+</p>
+<!-- --------------------------------------------------- -->
+
+<h2>Linear Regression</h2>
+<!-- TODO: Finish -->
+
+<h2>Classification Algorithms</h2>
+<p> due to the poor performance of our regression analysis, we attempted to resturcture our problem as a classification task</p>
+<img
+  src="img/bins_histogram_unmodified.png"
+  style="width: 30%"
+/>
+<p>Our original distribution of cases numbers was very heavily focused in one group, with a few outliers. This is due to cases being a total number, rather than proportional to the population </p>
+<img
+  src="img/bins_histogram_scaled.png"
+  style="width: 30%"
+/>
+
+<p>When scaled to our population, we see a bigger spread, but still have a few outliers</p>
+
+  <img
+    src="img/bins_histogram.png.png"
+    style="width: 30%"
+  />
+<p>Our distribution looks like the above when the outliers are removed. So we settled on the bins <=20, (20, 100], (100, 200], >200. </p>
 
 <table border="1" class="dataframe">
   <thead>
@@ -1872,369 +2256,3 @@ to see how well this serves as a predictor for how covid spreads in a country.
     </tr>
   </tbody>
 </table>
-
-<!-------------------------------------------------------------->
-<h2>Touchpoint 3: Final Report</h2>
-<p>
-  The goal for this touchpoint was to perform supervised learning algorithms on
-  our cleaned data in order to predict the number of covid cases in a country x
-  days after first infection. We randomly split our data into 80% training data
-  and 20% test data. We also used the same training and test data across our
-  different algorithms so that we could compare results.
-</p>
-
-<h2>Neural Networks</h2>
-<p>
-  One method we chose was neural networks because it is a supervised learning
-  method that allows us to predict a final value based off of features.
-  Furthermore, we learned about them in class so we had a good foundation to
-  branch off of. We used a neural network with the features being the 58
-  different attributes of each country and the label being the number of covid
-  cases after x number of days. We ran our model 3 separate times, where x
-  varied between 5, 25, and 50.
-</p>
-
-<p>
-  For the architecture of our neural network, we chose the ReLU activation
-  function because ReLU models generally perform well and avoid certain pitfalls
-  like the vanishing gradient problem. We initially ran our model with 2 hidden
-  layers and 32 nodes at each layer, but our results weren’t very informative.
-  So, we upped the number of hidden layers and nodes for our data, but this led
-  to overfitting. To compensate for this, we applied regularization techniques
-  to arrive at our final model. Graphs and results for each of these steps are
-  shown below.
-</p>
-
-<p>
-  We chose an optimization function of “adam” from keras, since it is widely
-  used for regression in neural nets. We then chose mean squared error as our
-  loss function because we were working with a regression model and not a
-  classification one. We chose a linear activation for our output layer instead
-  of other choices like sigmoid, since our regression problem required an
-  unbounded function.
-</p>
-
-<h3>Results/Analysis</h3>
-<p>
-  These are our results and analysis from creating a neural network model and
-  running our training data through it. This analysis includes data from China.
-</p>
-
-<h4>Day 5:</h4>
-<ul>
-  <li>
-    For the 2 hidden layers/32 nodes a layer, we accrued a total loss of
-    1,173,031.375, indicating that our model performed on the poorer side. The
-    training ran for 100 epochs, and at each step our loss value decreases.
-  </li>
-  <img
-    src="img/NN/withChina/5-loss.png"
-    alt="img/NN/withChina/5-loss"
-    style="width: 80%"
-  />
-  <img
-    src="img/NN/withChina/5-graph1.png"
-    alt="img/NN/withChina/5-graph1"
-    style="width: 50%"
-  />
-  <li>
-    For the 5 hidden layers/1000 nodes a layer, which led to an overfitting of
-    our data. We suffered a greater loss starting at 40,589,744 and with each
-    epoch step, the loss did decrease linearly to 132,500.
-  </li>
-  <img
-    src="img/NN/withChina/5-graph2.png"
-    alt="img/NN/withChina/5-graph2"
-    style="width: 50%"
-  />
-  <li>
-    To account for the overfitting, we added regularization. We suffered from a
-    greater loss at the start at 40,589,536, which decreased each epoch step
-    until 177,400.9688.
-  </li>
-  <img
-    src="img/NN/withChina/5-graph3.png"
-    alt="img/NN/withChina/5-graph3"
-    style="width: 50%"
-  />
-</ul>
-
-<h4>Analysis:</h4>
-<p>
-  Our prediction output was hundreds times the actual number of cases for day 5.
-  For example, Guyana had 5 cases, but our neural net predicted that there
-  should be 918 cases for that day. Sudan had 1 case, but our neural net
-  predicted there should be 864. Mauritania had 1 case, but our model predicted
-  there should be 607 cases. The prediction is heavily skewed and does not
-  accurately reflect the total number of cases for day 5.
-</p>
-
-<h4>Day 25:</h4>
-<ul>
-  <img
-    src="img/NN/withChina/25-loss.png"
-    alt="img/NN/withChina/25-loss"
-    style="width: 80%"
-  />
-  <img
-    src="img/NN/withChina/25-graph1.png"
-    alt="img/NN/withChina/25-graph1"
-    style="width: 30%"
-  />
-  <img
-    src="img/NN/withChina/25-graph2.png"
-    alt="img/NN/withChina/25-graph2"
-    style="width: 30%"
-  />
-  <img
-    src="img/NN/withChina/25-graph3.png"
-    alt="img/NN/withChina/25-graph3"
-    style="width: 30%"
-  />
-  <li>
-    For the 2 hidden layers/32 nodes a layer, we accrued a total loss of
-    1,964,524.5
-  </li>
-  <li>
-    For the 5 hidden layers/1000 nodes a layer, we started with a loss of
-    128,204,568 and decreased to 201,917.625.
-  </li>
-  <li>
-    After accounting for overfitting, our losses were about the same as with
-    overfitting the data in part b) above.
-  </li>
-</ul>
-
-<h4>Analysis:</h4>
-<p>
-  Our prediction was off for day 25 covid cases. While Guyana, Sudan, and
-  Mauritania’s cases grew proportionally in both the predictions and the actual
-  data since day 5, the United Kingdom had 15,025 cases on day 25, but our model
-  predicted that it should be 1485.
-</p>
-
-<h4>Day 50:</h4>
-<ul>
-  <img
-    src="img/NN/withChina/50-loss.png"
-    alt="img/NN/withChina/50-loss"
-    style="width: 80%"
-  />
-  <img
-    src="img/NN/withChina/50-graph1.png"
-    alt="img/NN/withChina/50-graph1"
-    style="width: 30%"
-  />
-  <img
-    src="img/NN/withChina/50-graph2.png"
-    alt="img/NN/withChina/50-graph2"
-    style="width: 30%"
-  />
-  <img
-    src="img/NN/withChina/50-graph3.png"
-    alt="img/NN/withChina/50-graph3"
-    style="width: 30%"
-  />
-  <li>
-    For the 2 hidden layers/32 nodes a layer, we accrued a total loss of
-    390,577.0312.
-  </li>
-  <li>
-    For the 5 hidden layers/1000 nodes a layer, we started with a loss of
-    4,230,824,704 and decreased to 11,1263,208.
-  </li>
-  <li>
-    After accounting for overfitting, our losses were about the same as with
-    overfitting the data in part b) above.
-  </li>
-</ul>
-
-<h4>Analysis:</h4>
-<p>
-  Our prediction was more inaccurate compared to day 50 because cases were on
-  the rise for day 50, but our prediction model seemed to predict half of the
-  number of cases since day 25. For example, Guyana is predicted to have 535,
-  Sudan was supposed to have 554, and Mauritania should have 503 cases.
-</p>
-
-<h3>Re-evaluating our Model</h3>
-<p>
-  Once we obtained these results, we re-evaluated our model to look for
-  improvements. When looking back at our training data, we realized that one
-  huge outlier was China. While most countries only had a few dozen covid cases
-  at Day 5, China had over 80,000. We suspected that this huge number in China
-  biased our model. Thus, we re-ran our model after removing China from our
-  training set.
-</p>
-
-<h3>Results/Analysis Without China</h3>
-<h4>Day 5:</h4>
-<ul>
-  <img
-    src="img/NN/withoutChina/5-loss.png"
-    alt="img/NN/withoutChina/5-loss"
-    style="width: 80%"
-  />
-  <img
-    src="img/NN/withoutChina/5-graph1.png"
-    alt="img/NN/withoutChina/5-graph1"
-    style="width: 30%"
-  />
-  <img
-    src="img/NN/withoutChina/5-graph2.png"
-    alt="img/NN/withoutChina/5-graph2"
-    style="width: 30%"
-  />
-  <img
-    src="img/NN/withoutChina/5-graph3.png"
-    alt="img/NN/withoutChina/5-graph3"
-    style="width: 30%"
-  />
-  <li>
-    For the 2 hidden layers/32 nodes a layer, we accrued a total loss of
-    11,823.3936, indicating that our model performed on the more accurate side.
-    The training ran for 100 epochs, and at each step our loss value decreases.
-  </li>
-  <li>
-    For the 5 hidden layers/1000 nodes a layer, which led to an overfitting of
-    our data. We suffered a greater loss starting at 174,299.9062 and with each
-    epoch step, the loss did decrease linearly to 199.5918.
-  </li>
-  <li>
-    To account for the overfitting, we added regularization. We suffered from a
-    greater loss at the start at 173,467.0156 which decreased each epoch step
-    until 21,047.6465.
-  </li>
-</ul>
-
-<h4>Analysis:</h4>
-<p>
-  Our prediction was the most accurate for day 5 without China’s data as part of
-  the training set. Guyana had 5 cases, but should have 21, Sudan had 1, but
-  should have 3, the United Kingdom had 220, but should have 229, and Mauritania
-  had 1, but should have -15. Overall, the prediction was pretty close to the
-  actual cases of day 5.
-</p>
-
-<h4>Day 25:</h4>
-<ul>
-  <img
-    src="img/NN/withoutChina/25-loss.png"
-    alt="img/NN/withoutChina/25-loss"
-    style="width: 80%"
-  />
-  <img
-    src="img/NN/withoutChina/25-graph1.png"
-    alt="img/NN/withoutChina/25-graph1"
-    style="width: 30%"
-  />
-  <img
-    src="img/NN/withoutChina/25-graph2.png"
-    alt="img/NN/withoutChina/25-graph2"
-    style="width: 30%"
-  />
-  <img
-    src="img/NN/withoutChina/25-graph3.png"
-    alt="img/NN/withoutChina/25-graph3"
-    style="width: 30%"
-  />
-  <li>
-    For the 2 hidden layers/32 nodes a layer, we accrued a total loss of
-    8,670,628, indicating that our model performed on the poorer side. The
-    training ran for 100 epochs, and at each step our loss value decreases.
-  </li>
-  <li>
-    For the 5 hidden layers/1000 nodes a layer, which led to an overfitting of
-    our data. We suffered a greater loss starting at 8,727,872 and with each
-    epoch step, the loss did decrease linearly to 483,070.5938.
-  </li>
-  <li>
-    To account for the overfitting, we added regularization. We suffered from a
-    greater loss at the start at 87,281,136 which decreased each epoch step
-    until 4,451,134.5.
-  </li>
-</ul>
-
-<h4>Analysis:</h4>
-<p>
-  Our prediction for day 25 was inaccurate as the predicted number of cases were
-  much greater than the actual number of cases. Guyana had 37, but should be
-  1171, Sudan had 12, but should have 594, and the United Kingdom had 15,025,
-  but should have 5783.54. Some countries, such as France and Germany had covid
-  cases in the range of 80,000, which could be the outlier that influenced our
-  model’s prediction to skew the cases higher than the actual number of cases.
-</p>
-
-<h4>Day 50:</h4>
-<ul>
-  <img
-    src="img/NN/withoutChina/50-loss.png"
-    alt="img/NN/withoutChina/50-loss"
-    style="width: 80%"
-  />
-  <img
-    src="img/NN/withoutChina/50-graph1.png"
-    alt="img/NN/withoutChina/50-graph1"
-    style="width: 30%"
-  />
-  <img
-    src="img/NN/withoutChina/50-graph2.png"
-    alt="img/NN/withoutChina/50-graph2"
-    style="width: 30%"
-  />
-  <img
-    src="img/NN/withoutChina/50-graph3.png"
-    alt="img/NN/withoutChina/50-graph3"
-    style="width: 30%"
-  />
-  <li>
-    For the 2 hidden layers/32 nodes a layer, we accrued a total loss of
-    160,051,104, indicating that our model performed on the poorer side. The
-    training ran for 100 epochs, and at each step our loss value decreases.
-  </li>
-  <li>
-    For the 5 hidden layers/1000 nodes a layer, which led to an overfitting of
-    our data. We suffered a greater loss starting at 4,213,324,288 and with each
-    epoch step, the loss did decrease linearly to 44,437,860.
-  </li>
-  <li>
-    To account for the overfitting, we added regularization. We suffered from a
-    greater loss at the start at 4,213,406,464 which decreased each epoch step
-    until 161,831,648.
-  </li>
-</ul>
-
-<h4>Analysis:</h4>
-<p>
-  The prediction of cases for day 50 grew proportionally to the number of cases
-  for day 25. For example, Guyana had 82, but should have 6420, Sugan had 442,
-  but should have 3163, and the United Kingdom had 121,412, but should have
-  16,688. The prediction was still inaccurate, but that could be due to the
-  outliers such as France, Germany, and Italy for our training set.
-</p>
-
-<h3>Overall Analysis</h3>
-<p>
-  Overall, our neural network performed poorly (except for day 5’s prediction
-  without China’s data) and this could be due to our poor training data. Our
-  predictions for covid cases including China’s were the most inaccurate. The
-  predicted number cases were in the hundreds and thousands, all relatively
-  close to one another. However, the actual number of cases were not as
-  uniformed. Some countries only had a handful, while others had thousands of
-  cases. As for our data without China’s data, we suspected that since a handful
-  of countries have outliers with cases in the range of 80,000-100,000, while
-  most countries only hand a few thousands, this could be the reason why our
-  neural network also performed poorly. Countries such as France, Germany, and
-  Italy experienced a spike in covid cases, and as a result, countries that
-  share similar characteristics to those countries were expected to have the
-  same number of cases. The outliers also overpredicted for the rest of the
-  countries, a similar trends that we saw when we included China’s data in our
-  training sets.
-</p>
-<!-- --------------------------------------------------- -->
-
-<h2>Linear Regression</h2>
-<!-- TODO: Finish -->
-
-<h2>Classification Algorithms</h2>
-<!-- TODO: Finish -->
