@@ -802,10 +802,24 @@ to see how well this serves as a predictor for how covid spreads in a country.
 <p>When scaled to our population, we see a bigger spread, but still have a few outliers</p>
 
   <img
-    src="img/bins_histogram.png.png"
+    src="img/bins_histogram.png"
     style="width: 30%"
   />
 <p>Our distribution looks like the above when the outliers are removed. So we settled on the bins <=20, (20, 100], (100, 200], >200. </p>
+
+
+<img
+  src="img/DecisionTree.png"
+  style="width: 30%"
+/>
+<p>The confusion matrix and classification report are above. Since we do not have a strong preference for precision or recall, we mainly looked at our F1 score. It has an accuracy of .63 overall, but the macro average is .4 and the weight average is .6. Overall, there are many countries in group 1, which we classified well, but it became much more difficult for other groups</p>
+
+<img
+  src="img/DecisionTree_diagram.png"
+  style="width: 30%"
+/>
+<p>The decision tree is pictured above. Clearly, one of the most informative features was the population size (x[1]) and the rural clean drinking water percentage (x[26]). Both of these make sense as they directly impact the spread of disease. Given the nature of our data, a lot of the information can be hard to collect, especially for less developed coutnries, where there is no infrastructure to gather those statistics. Even in countries with the resources to do so, testing for coronavirus may not be a social norm. This may help explain the difficulty our model had in properly predicting cases</p>
+
 
 <table border="1" class="dataframe">
   <thead>
