@@ -785,8 +785,784 @@ to see how well this serves as a predictor for how covid spreads in a country.
 <!-- --------------------------------------------------- -->
 
 <h2>Linear Regression</h2>
-<!-- TODO: Finish -->
+<p>
+  The next method we chose to analyze was linear regression. We fit 3 different 
+  models with day 5, day 25 and day 50 as our responses. The training and test 
+  input values were the same for each model. Using the scikit learn library
+  we were able to fit our data through their linear regression algorithm. 
+</p>
+<h3>Results</h3>
+<p>
+  These are our results from fitting a linear regression model and
+  comparing the testing and training predictors from it.
+</p>
 
+<h4>Day 5:</h4>
+<ul>
+  <li>Root Mean Squared Error: 3089.8333721022786</li>
+  <li>R<sup>2</sup>: -9.22026025456404</li>
+  <li>
+    Coefficents obtained:
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Coefficient</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Surface area (km2)</th>
+      <td>-0.000592</td>
+    </tr>
+    <tr>
+      <th>Population in thousands (2017)</th>
+      <td>0.009814</td>
+    </tr>
+    <tr>
+      <th>Population density (per km2, 2017)</th>
+      <td>0.082358</td>
+    </tr>
+    <tr>
+      <th>GDP: Gross domestic product (million current US$)</th>
+      <td>0.007094</td>
+    </tr>
+    <tr>
+      <th>GDP growth rate (annual %, const. 2005 prices)</th>
+      <td>-31.141943</td>
+    </tr>
+    <tr>
+      <th>GDP per capita (current US$)</th>
+      <td>-0.040736</td>
+    </tr>
+    <tr>
+      <th>Economy: Agriculture (% of GVA)</th>
+      <td>461.899506</td>
+    </tr>
+    <tr>
+      <th>Economy: Industry (% of GVA)</th>
+      <td>477.067163</td>
+    </tr>
+    <tr>
+      <th>Economy: Services and other activity (% of GVA)</th>
+      <td>461.576469</td>
+    </tr>
+    <tr>
+      <th>Employment: Agriculture (% of employed)</th>
+      <td>-14.124459</td>
+    </tr>
+    <tr>
+      <th>Employment: Industry (% of employed)</th>
+      <td>-64.709888</td>
+    </tr>
+    <tr>
+      <th>Employment: Services (% of employed)</th>
+      <td>-57.554237</td>
+    </tr>
+    <tr>
+      <th>Unemployment (% of labour force)</th>
+      <td>3.782167</td>
+    </tr>
+    <tr>
+      <th>Agricultural production index (2004-2006=100)</th>
+      <td>-11.663270</td>
+    </tr>
+    <tr>
+      <th>Food production index (2004-2006=100)</th>
+      <td>14.836243</td>
+    </tr>
+    <tr>
+      <th>International trade: Exports (million US$)</th>
+      <td>0.070340</td>
+    </tr>
+    <tr>
+      <th>International trade: Imports (million US$)</th>
+      <td>-0.102310</td>
+    </tr>
+    <tr>
+      <th>Population growth rate (average annual %)</th>
+      <td>-28.060662</td>
+    </tr>
+    <tr>
+      <th>Urban population (% of total population)</th>
+      <td>-16.780000</td>
+    </tr>
+    <tr>
+      <th>Urban population growth rate (average annual %)</th>
+      <td>-85.253531</td>
+    </tr>
+    <tr>
+      <th>Population age distribution (0-14  years, %)</th>
+      <td>-0.592664</td>
+    </tr>
+    <tr>
+      <th>Population age distribution (60+ years, %)</th>
+      <td>-196.553274</td>
+    </tr>
+    <tr>
+      <th>Health: Total expenditure (% of GDP)</th>
+      <td>-77.742204</td>
+    </tr>
+    <tr>
+      <th>Health: Physicians (per 1000 pop.)</th>
+      <td>162.854285</td>
+    </tr>
+    <tr>
+      <th>Education: Government expenditure (% of GDP)</th>
+      <td>86.082731</td>
+    </tr>
+    <tr>
+      <th>Pop. using improved drinking water (urban, %)</th>
+      <td>2.256269</td>
+    </tr>
+    <tr>
+      <th>Pop. using improved drinking water (rural, %)</th>
+      <td>1.969917</td>
+    </tr>
+    <tr>
+      <th>Pop. using improved sanitation facilities (urban/rural, %)</th>
+      <td>50.478252</td>
+    </tr>
+    <tr>
+      <th>Life expectancy at birth (Female)</th>
+      <td>24.712432</td>
+    </tr>
+    <tr>
+      <th>Life expectancy at birth (Male)</th>
+      <td>188.533257</td>
+    </tr>
+    <tr>
+      <th>Education: Primary gross enrol. ratio (Female)</th>
+      <td>-55.229065</td>
+    </tr>
+    <tr>
+      <th>Education: Primary gross enrol. ratio (Male)</th>
+      <td>32.132444</td>
+    </tr>
+    <tr>
+      <th>Education: Secondary gross enrol. ratio (Female)</th>
+      <td>22.741424</td>
+    </tr>
+    <tr>
+      <th>Education: Secondary gross enrol. ratio (Male)</th>
+      <td>17.714965</td>
+    </tr>
+    <tr>
+      <th>Education: Tertiary gross enrol. ratio (Female)</th>
+      <td>7.245517</td>
+    </tr>
+    <tr>
+      <th>Education: Tertiary gross enrol. ratio (Male)</th>
+      <td>-1.958708</td>
+    </tr>
+    <tr>
+      <th>SouthernAsia</th>
+      <td>-2385.275207</td>
+    </tr>
+    <tr>
+      <th>SouthernEurope</th>
+      <td>1019.388627</td>
+    </tr>
+    <tr>
+      <th>NorthernAfrica</th>
+      <td>-293.820225</td>
+    </tr>
+    <tr>
+      <th>Polynesia</th>
+      <td>-1299.475307</td>
+    </tr>
+    <tr>
+      <th>MiddleAfrica</th>
+      <td>527.111332</td>
+    </tr>
+    <tr>
+      <th>Caribbean</th>
+      <td>-544.247074</td>
+    </tr>
+    <tr>
+      <th>SouthAmerica</th>
+      <td>-1707.218928</td>
+    </tr>
+    <tr>
+      <th>WesternAsia</th>
+      <td>-422.860978</td>
+    </tr>
+    <tr>
+      <th>Oceania</th>
+      <td>413.075482</td>
+    </tr>
+    <tr>
+      <th>WesternEurope</th>
+      <td>2980.192452</td>
+    </tr>
+    <tr>
+      <th>EasternEurope</th>
+      <td>1494.624878</td>
+    </tr>
+    <tr>
+      <th>CentralAmerica</th>
+      <td>-211.138524</td>
+    </tr>
+    <tr>
+      <th>WesternAfrica</th>
+      <td>-685.126961</td>
+    </tr>
+    <tr>
+      <th>NorthernAmerica</th>
+      <td>5979.790102</td>
+    </tr>
+    <tr>
+      <th>SouthernAfrica</th>
+      <td>2012.000956</td>
+    </tr>
+    <tr>
+      <th>South-easternAsia</th>
+      <td>-1588.409532</td>
+    </tr>
+    <tr>
+      <th>EasternAfrica</th>
+      <td>-148.903287</td>
+    </tr>
+    <tr>
+      <th>NorthernEurope</th>
+      <td>330.057896</td>
+    </tr>
+    <tr>
+      <th>EasternAsia</th>
+      <td>-2436.797992</td>
+    </tr>
+    <tr>
+      <th>Micronesia</th>
+      <td>-674.256613</td>
+    </tr>
+    <tr>
+      <th>CentralAsia</th>
+      <td>-2018.291284</td>
+    </tr>
+    <tr>
+      <th>Melanesia</th>
+      <td>-340.419815</td>
+    </tr>
+  </tbody>
+</table>
+  </li>
+</ul>
+<h4>Day 25:</h4>
+<ul>
+  <li>Root Mean Squared Error: 10138.714877138673</li>
+  <li>R<sup>2</sup>: 0.05230288513402026</li>
+  <li>
+    Coefficents obtained:
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Coefficient</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Surface area (km2)</th>
+      <td>-0.000876</td>
+    </tr>
+    <tr>
+      <th>Population in thousands (2017)</th>
+      <td>-0.007984</td>
+    </tr>
+    <tr>
+      <th>Population density (per km2, 2017)</th>
+      <td>0.287911</td>
+    </tr>
+    <tr>
+      <th>GDP: Gross domestic product (million current US$)</th>
+      <td>0.004781</td>
+    </tr>
+    <tr>
+      <th>GDP growth rate (annual %, const. 2005 prices)</th>
+      <td>-158.705805</td>
+    </tr>
+    <tr>
+      <th>GDP per capita (current US$)</th>
+      <td>0.023336</td>
+    </tr>
+    <tr>
+      <th>Economy: Agriculture (% of GVA)</th>
+      <td>-8949.381558</td>
+    </tr>
+    <tr>
+      <th>Economy: Industry (% of GVA)</th>
+      <td>-8981.384032</td>
+    </tr>
+    <tr>
+      <th>Economy: Services and other activity (% of GVA)</th>
+      <td>-8918.774758</td>
+    </tr>
+    <tr>
+      <th>Employment: Agriculture (% of employed)</th>
+      <td>635.976714</td>
+    </tr>
+    <tr>
+      <th>Employment: Industry (% of employed)</th>
+      <td>734.167572</td>
+    </tr>
+    <tr>
+      <th>Employment: Services (% of employed)</th>
+      <td>606.252938</td>
+    </tr>
+    <tr>
+      <th>Unemployment (% of labour force)</th>
+      <td>80.968647</td>
+    </tr>
+    <tr>
+      <th>Agricultural production index (2004-2006=100)</th>
+      <td>-174.803195</td>
+    </tr>
+    <tr>
+      <th>Food production index (2004-2006=100)</th>
+      <td>183.531368</td>
+    </tr>
+    <tr>
+      <th>International trade: Exports (million US$)</th>
+      <td>0.059687</td>
+    </tr>
+    <tr>
+      <th>International trade: Imports (million US$)</th>
+      <td>-0.041960</td>
+    </tr>
+    <tr>
+      <th>Population growth rate (average annual %)</th>
+      <td>322.283175</td>
+    </tr>
+    <tr>
+      <th>Urban population (% of total population)</th>
+      <td>-35.485887</td>
+    </tr>
+    <tr>
+      <th>Urban population growth rate (average annual %)</th>
+      <td>-437.540647</td>
+    </tr>
+    <tr>
+      <th>Population age distribution (0-14  years, %)</th>
+      <td>203.830641</td>
+    </tr>
+    <tr>
+      <th>Population age distribution (60+ years, %)</th>
+      <td>-150.435732</td>
+    </tr>
+    <tr>
+      <th>Health: Total expenditure (% of GDP)</th>
+      <td>-155.091366</td>
+    </tr>
+    <tr>
+      <th>Health: Physicians (per 1000 pop.)</th>
+      <td>184.982954</td>
+    </tr>
+    <tr>
+      <th>Education: Government expenditure (% of GDP)</th>
+      <td>-296.591400</td>
+    </tr>
+    <tr>
+      <th>Pop. using improved drinking water (urban, %)</th>
+      <td>56.570082</td>
+    </tr>
+    <tr>
+      <th>Pop. using improved drinking water (rural, %)</th>
+      <td>-68.007361</td>
+    </tr>
+    <tr>
+      <th>Pop. using improved sanitation facilities (urban/rural, %)</th>
+      <td>-8.954398</td>
+    </tr>
+    <tr>
+      <th>Life expectancy at birth (Female)</th>
+      <td>-59.232233</td>
+    </tr>
+    <tr>
+      <th>Life expectancy at birth (Male)</th>
+      <td>256.871184</td>
+    </tr>
+    <tr>
+      <th>Education: Primary gross enrol. ratio (Female)</th>
+      <td>89.309733</td>
+    </tr>
+    <tr>
+      <th>Education: Primary gross enrol. ratio (Male)</th>
+      <td>-101.276460</td>
+    </tr>
+    <tr>
+      <th>Education: Secondary gross enrol. ratio (Female)</th>
+      <td>-58.512073</td>
+    </tr>
+    <tr>
+      <th>Education: Secondary gross enrol. ratio (Male)</th>
+      <td>64.922626</td>
+    </tr>
+    <tr>
+      <th>Education: Tertiary gross enrol. ratio (Female)</th>
+      <td>38.043463</td>
+    </tr>
+    <tr>
+      <th>Education: Tertiary gross enrol. ratio (Male)</th>
+      <td>46.395570</td>
+    </tr>
+    <tr>
+      <th>SouthernAsia</th>
+      <td>2871.004919</td>
+    </tr>
+    <tr>
+      <th>SouthernEurope</th>
+      <td>7276.982247</td>
+    </tr>
+    <tr>
+      <th>NorthernAfrica</th>
+      <td>538.838831</td>
+    </tr>
+    <tr>
+      <th>Polynesia</th>
+      <td>-1660.895592</td>
+    </tr>
+    <tr>
+      <th>MiddleAfrica</th>
+      <td>1326.815129</td>
+    </tr>
+    <tr>
+      <th>Caribbean</th>
+      <td>703.242381</td>
+    </tr>
+    <tr>
+      <th>SouthAmerica</th>
+      <td>213.560248</td>
+    </tr>
+    <tr>
+      <th>WesternAsia</th>
+      <td>200.547168</td>
+    </tr>
+    <tr>
+      <th>Oceania</th>
+      <td>-2045.763259</td>
+    </tr>
+    <tr>
+      <th>WesternEurope</th>
+      <td>-1767.936120</td>
+    </tr>
+    <tr>
+      <th>EasternEurope</th>
+      <td>-261.461634</td>
+    </tr>
+    <tr>
+      <th>CentralAmerica</th>
+      <td>-604.558165</td>
+    </tr>
+    <tr>
+      <th>WesternAfrica</th>
+      <td>-920.171466</td>
+    </tr>
+    <tr>
+      <th>NorthernAmerica</th>
+      <td>2918.576882</td>
+    </tr>
+    <tr>
+      <th>SouthernAfrica</th>
+      <td>2240.085974</td>
+    </tr>
+    <tr>
+      <th>South-easternAsia</th>
+      <td>-369.207253</td>
+    </tr>
+    <tr>
+      <th>EasternAfrica</th>
+      <td>399.096828</td>
+    </tr>
+    <tr>
+      <th>NorthernEurope</th>
+      <td>832.621931</td>
+    </tr>
+    <tr>
+      <th>EasternAsia</th>
+      <td>-13965.238835</td>
+    </tr>
+    <tr>
+      <th>Micronesia</th>
+      <td>999.076275</td>
+    </tr>
+    <tr>
+      <th>CentralAsia</th>
+      <td>-593.733843</td>
+    </tr>
+    <tr>
+      <th>Melanesia</th>
+      <td>1668.517354</td>
+    </tr>
+  </tbody>
+</table>
+  </li>
+</ul>
+<h4>Day 50:</h4>
+<ul>
+  <li>Root Mean Squared Error: 22676.10731668697</li>
+  <li>R<sup>2</sup>: 0.5757046272185465</li>
+  <li>
+    Coefficents obtained:
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Coefficient</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Surface area (km2)</th>
+      <td>0.000095</td>
+    </tr>
+    <tr>
+      <th>Population in thousands (2017)</th>
+      <td>-0.093827</td>
+    </tr>
+    <tr>
+      <th>Population density (per km2, 2017)</th>
+      <td>-0.094407</td>
+    </tr>
+    <tr>
+      <th>GDP: Gross domestic product (million current US$)</th>
+      <td>0.017941</td>
+    </tr>
+    <tr>
+      <th>GDP growth rate (annual %, const. 2005 prices)</th>
+      <td>-31.772956</td>
+    </tr>
+    <tr>
+      <th>GDP per capita (current US$)</th>
+      <td>0.167336</td>
+    </tr>
+    <tr>
+      <th>Economy: Agriculture (% of GVA)</th>
+      <td>-10863.420020</td>
+    </tr>
+    <tr>
+      <th>Economy: Industry (% of GVA)</th>
+      <td>-10900.281156</td>
+    </tr>
+    <tr>
+      <th>Economy: Services and other activity (% of GVA)</th>
+      <td>-10564.691927</td>
+    </tr>
+    <tr>
+      <th>Employment: Agriculture (% of employed)</th>
+      <td>1906.698447</td>
+    </tr>
+    <tr>
+      <th>Employment: Industry (% of employed)</th>
+      <td>2286.966582</td>
+    </tr>
+    <tr>
+      <th>Employment: Services (% of employed)</th>
+      <td>1967.557061</td>
+    </tr>
+    <tr>
+      <th>Unemployment (% of labour force)</th>
+      <td>147.038368</td>
+    </tr>
+    <tr>
+      <th>Agricultural production index (2004-2006=100)</th>
+      <td>-761.858998</td>
+    </tr>
+    <tr>
+      <th>Food production index (2004-2006=100)</th>
+      <td>832.290646</td>
+    </tr>
+    <tr>
+      <th>International trade: Exports (million US$)</th>
+      <td>-0.199967</td>
+    </tr>
+    <tr>
+      <th>International trade: Imports (million US$)</th>
+      <td>0.333124</td>
+    </tr>
+    <tr>
+      <th>Population growth rate (average annual %)</th>
+      <td>626.593001</td>
+    </tr>
+    <tr>
+      <th>Urban population (% of total population)</th>
+      <td>-90.937254</td>
+    </tr>
+    <tr>
+      <th>Urban population growth rate (average annual %)</th>
+      <td>-1024.178392</td>
+    </tr>
+    <tr>
+      <th>Population age distribution (0-14  years, %)</th>
+      <td>402.945568</td>
+    </tr>
+    <tr>
+      <th>Population age distribution (60+ years, %)</th>
+      <td>-804.977252</td>
+    </tr>
+    <tr>
+      <th>Health: Total expenditure (% of GDP)</th>
+      <td>-398.319266</td>
+    </tr>
+    <tr>
+      <th>Health: Physicians (per 1000 pop.)</th>
+      <td>-454.752872</td>
+    </tr>
+    <tr>
+      <th>Education: Government expenditure (% of GDP)</th>
+      <td>-706.404800</td>
+    </tr>
+    <tr>
+      <th>Pop. using improved drinking water (urban, %)</th>
+      <td>119.339103</td>
+    </tr>
+    <tr>
+      <th>Pop. using improved drinking water (rural, %)</th>
+      <td>-224.344591</td>
+    </tr>
+    <tr>
+      <th>Pop. using improved sanitation facilities (urban/rural, %)</th>
+      <td>-29.369572</td>
+    </tr>
+    <tr>
+      <th>Life expectancy at birth (Female)</th>
+      <td>405.878490</td>
+    </tr>
+    <tr>
+      <th>Life expectancy at birth (Male)</th>
+      <td>-863.804357</td>
+    </tr>
+    <tr>
+      <th>Education: Primary gross enrol. ratio (Female)</th>
+      <td>440.906118</td>
+    </tr>
+    <tr>
+      <th>Education: Primary gross enrol. ratio (Male)</th>
+      <td>-412.362648</td>
+    </tr>
+    <tr>
+      <th>Education: Secondary gross enrol. ratio (Female)</th>
+      <td>-37.212022</td>
+    </tr>
+    <tr>
+      <th>Education: Secondary gross enrol. ratio (Male)</th>
+      <td>-38.820533</td>
+    </tr>
+    <tr>
+      <th>Education: Tertiary gross enrol. ratio (Female)</th>
+      <td>83.176119</td>
+    </tr>
+    <tr>
+      <th>Education: Tertiary gross enrol. ratio (Male)</th>
+      <td>283.163214</td>
+    </tr>
+    <tr>
+      <th>SouthernAsia</th>
+      <td>21122.427703</td>
+    </tr>
+    <tr>
+      <th>SouthernEurope</th>
+      <td>26370.516611</td>
+    </tr>
+    <tr>
+      <th>NorthernAfrica</th>
+      <td>5878.826168</td>
+    </tr>
+    <tr>
+      <th>Polynesia</th>
+      <td>2450.106742</td>
+    </tr>
+    <tr>
+      <th>MiddleAfrica</th>
+      <td>180.135335</td>
+    </tr>
+    <tr>
+      <th>Caribbean</th>
+      <td>7161.514887</td>
+    </tr>
+    <tr>
+      <th>SouthAmerica</th>
+      <td>3676.814556</td>
+    </tr>
+    <tr>
+      <th>WesternAsia</th>
+      <td>4976.852822</td>
+    </tr>
+    <tr>
+      <th>Oceania</th>
+      <td>-19595.828072</td>
+    </tr>
+    <tr>
+      <th>WesternEurope</th>
+      <td>1735.338865</td>
+    </tr>
+    <tr>
+      <th>EasternEurope</th>
+      <td>6413.062645</td>
+    </tr>
+    <tr>
+      <th>CentralAmerica</th>
+      <td>-2713.733248</td>
+    </tr>
+    <tr>
+      <th>WesternAfrica</th>
+      <td>-2142.073988</td>
+    </tr>
+    <tr>
+      <th>NorthernAmerica</th>
+      <td>6.217105</td>
+    </tr>
+    <tr>
+      <th>SouthernAfrica</th>
+      <td>-7886.545870</td>
+    </tr>
+    <tr>
+      <th>South-easternAsia</th>
+      <td>2344.892609</td>
+    </tr>
+    <tr>
+      <th>EasternAfrica</th>
+      <td>-1902.836165</td>
+    </tr>
+    <tr>
+      <th>NorthernEurope</th>
+      <td>9697.773246</td>
+    </tr>
+    <tr>
+      <th>EasternAsia</th>
+      <td>-67805.693496</td>
+    </tr>
+    <tr>
+      <th>Micronesia</th>
+      <td>5404.415232</td>
+    </tr>
+    <tr>
+      <th>CentralAsia</th>
+      <td>-1277.944771</td>
+    </tr>
+    <tr>
+      <th>Melanesia</th>
+      <td>5905.761086</td>
+    </tr>
+  </tbody>
+</table>
+  </li>
+</ul>
+
+<h3>Overall Analysis</h3>
+<p>
+  As we can see by looking at our results for day 5 the linear regression
+  model did a very poor job at predicting covid cases. This could due to
+  many reasons but we believe it is mainly becuase of the uncertainty. In
+  reality nothing could have predicted the inital cases. Moving on to day 25
+  we observed that the rmse increased and this was most likely due to the high
+  variance caused between the predictors. On the other hand, The R<sup>2</sup>
+  was much better but still indicated that this model was probably not the best.
+  Finally, day 50 resulted in a much better regression. The R<sup>2</sup> was
+  approximately 57% which shows that it was the best fit so far. In conclusion,
+  we can see that linear regression may not be the best way to predict covid cases
+  in the early stages. This could be due to high variablity and uncertainty. However,
+  better results are achieved in subsequent periods.
+</p>
 <h2>Classification Algorithms</h2>
 <p> due to the poor performance of our regression analysis, we attempted to resturcture our problem as a classification task</p>
 <img
